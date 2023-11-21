@@ -1,0 +1,14 @@
+.create-account .MuiButton-root {
+  float: right;
+}
+
+@media (max-width: 600px) {
+  .create-account {
+    text-align: center;
+  }
+  
+  .create-account .MuiButton-root {
+    float: none;
+    width: 100%;
+  }
+}

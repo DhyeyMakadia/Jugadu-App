@@ -21,6 +21,7 @@ import BallotTwoToneIcon from '@mui/icons-material/BallotTwoTone';
 import BeachAccessTwoToneIcon from '@mui/icons-material/BeachAccessTwoTone';
 import EmojiEventsTwoToneIcon from '@mui/icons-material/EmojiEventsTwoTone';
 import FilterVintageTwoToneIcon from '@mui/icons-material/FilterVintageTwoTone';
+import FilterVintageIcon from '@mui/icons-material/FilterVintage';
 import HowToVoteTwoToneIcon from '@mui/icons-material/HowToVoteTwoTone';
 import LocalPharmacyTwoToneIcon from '@mui/icons-material/LocalPharmacyTwoTone';
 import RedeemTwoToneIcon from '@mui/icons-material/RedeemTwoTone';
@@ -31,6 +32,9 @@ import ChromeReaderModeTwoToneIcon from '@mui/icons-material/ChromeReaderModeTwo
 import WorkspacePremiumTwoToneIcon from '@mui/icons-material/WorkspacePremiumTwoTone';
 import CameraFrontTwoToneIcon from '@mui/icons-material/CameraFrontTwoTone';
 import DisplaySettingsTwoToneIcon from '@mui/icons-material/DisplaySettingsTwoTone';
+import WidgetsIcon from '@mui/icons-material/Widgets';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import { ROUTES } from 'src/utils/routes';
 
 const MenuWrapper = styled(Box)(
   ({ theme }) => `
@@ -188,10 +192,10 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/overview"
-                  startIcon={<DesignServicesTwoToneIcon />}
+                  to={ROUTES.AdminDashboard}
+                  startIcon={<WidgetsIcon />}
                 >
-                  Overview
+                  Dashboard
                 </Button>
               </ListItem>
             </List>
@@ -247,10 +251,32 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/management/transactions"
+                  to={ROUTES.AdminWithdraw}
                   startIcon={<TableChartTwoToneIcon />}
                 >
-                  Transactions List
+                  Withdraw Requests
+                </Button>
+              </ListItem>
+              <ListItem component="div">
+                <Button
+                  disableRipple
+                  component={RouterLink}
+                  onClick={closeSidebar}
+                  to={ROUTES.AdminUsers}
+                  startIcon={<ManageAccountsIcon />}
+                >
+                  Manage Users
+                </Button>
+              </ListItem>
+              <ListItem component="div">
+                <Button
+                  disableRipple
+                  component={RouterLink}
+                  onClick={closeSidebar}
+                  to={ROUTES.AdminRashi}
+                  startIcon={<FilterVintageIcon />}
+                >
+                  Manage Rashi
                 </Button>
               </ListItem>
             </List>

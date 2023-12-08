@@ -18,8 +18,9 @@ import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
 import HeaderButtons from './Buttons';
 import HeaderUserbox from './Userbox';
 import HeaderMenu from './Menu';
+import { useLocation } from 'react-router';
 
-const HeaderWrapper = styled(Box)(
+const AdminHeaderWrapper = styled(Box)(
   ({ theme }) => `
         height: ${theme.header.height};
         color: ${theme.header.textColor};
@@ -37,13 +38,31 @@ const HeaderWrapper = styled(Box)(
         }
 `
 );
+const HeaderWrapper = styled(Box)(
+  ({ theme }) => `
+        height: ${theme.header.height};
+        color: ${theme.header.textColor};
+        padding: ${theme.spacing(0, 2)};
+        right: 0;
+        z-index: 6;
+        background-color: ${alpha(theme.header.background, 0.95)};
+        backdrop-filter: blur(3px);
+        position: fixed;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: ${theme.header.height};
+`
+);
 
 function Header() {
   const { sidebarToggle, toggleSidebar } = useContext(SidebarContext);
+  const { pathname } = useLocation();
   const theme = useTheme();
-
+  const HeaderWrapperComponent = pathname.includes('/admin')
+    ? AdminHeaderWrapper
+    : HeaderWrapper;
   return (
-    <HeaderWrapper
+    <HeaderWrapperComponent
       display="flex"
       alignItems="center"
       sx={{
@@ -91,7 +110,7 @@ function Header() {
           </Tooltip>
         </Box>
       </Box>
-    </HeaderWrapper>
+    </HeaderWrapperComponent>
   );
 }
 

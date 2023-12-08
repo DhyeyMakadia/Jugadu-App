@@ -258,7 +258,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       {cryptoOrder.orderDetails}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" noWrap>
-                      {format(cryptoOrder.orderDate, 'MMMM dd yyyy')}
+                      {format(cryptoOrder.orderDate, 'MMMM dd yyyy')} 
                     </Typography>
                   </TableCell>
                   <TableCell>

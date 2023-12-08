@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 
 import { NavLink } from 'react-router-dom';
 
@@ -22,6 +22,8 @@ import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
 import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
+import { ROUTES } from 'src/utils/routes';
+import { ThemeContext } from 'src/theme/ThemeProvider';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -59,6 +61,7 @@ const UserBoxDescription = styled(Typography)(
 );
 
 function HeaderUserbox() {
+  const { handleLogout } = useContext(ThemeContext);
   const user = {
     name: 'Catherine Pike',
     avatar: '/static/images/avatars/1.jpg',
@@ -116,26 +119,32 @@ function HeaderUserbox() {
         </MenuUserBox>
         <Divider sx={{ mb: 0 }} />
         <List sx={{ p: 1 }} component="nav">
-          <ListItem button to="/management/profile/details" component={NavLink}>
+          {/* <ListItem button to="/management/profile/details" component={NavLink}>
             <AccountBoxTwoToneIcon fontSize="small" />
             <ListItemText primary="My Profile" />
-          </ListItem>
-          <ListItem button to="/dashboards/messenger" component={NavLink}>
+          </ListItem> */}
+          <ListItem
+            button
+            to={ROUTES.MyOrders}
+            component={NavLink}
+            onClick={handleClose}
+          >
             <InboxTwoToneIcon fontSize="small" />
-            <ListItemText primary="Messenger" />
+            <ListItemText primary="My Orders" />
           </ListItem>
           <ListItem
             button
-            to="/management/profile/settings"
+            to={ROUTES.Transactions}
             component={NavLink}
+            onClick={handleClose}
           >
             <AccountTreeTwoToneIcon fontSize="small" />
-            <ListItemText primary="Account Settings" />
+            <ListItemText primary="Transactions" />
           </ListItem>
         </List>
         <Divider />
         <Box sx={{ m: 1 }}>
-          <Button color="primary" fullWidth>
+          <Button color="primary" fullWidth onClick={handleLogout}>
             <LockOpenTwoToneIcon sx={{ mr: 1 }} />
             Sign out
           </Button>

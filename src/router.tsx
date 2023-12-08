@@ -6,6 +6,7 @@ import SidebarLayout from 'src/layouts/SidebarLayout';
 import BaseLayout from 'src/layouts/BaseLayout';
 
 import SuspenseLoader from 'src/components/SuspenseLoader';
+import { ROUTES } from './utils/routes';
 
 const Loader = (Component) => (props) =>
   (
@@ -19,10 +20,30 @@ const Loader = (Component) => (props) =>
 const Overview = Loader(lazy(() => import('src/content/overview')));
 
 // Auth
-
 const Login = Loader(lazy(() => import('src/content/Auth/Login')));
-
 const Signup = Loader(lazy(() => import('src/content/Auth/Signup')));
+
+// Common
+
+const ForgotPassword = Loader(
+  lazy(() => import('src/content/user/ForgotPassword'))
+);
+const TermsAndConditions = Loader(
+  lazy(() => import('src/content/user/TermsAndConditions'))
+);
+
+// User
+const Dashboard = Loader(lazy(() => import('src/content/user/Dashboard')));
+const Transactions = Loader(lazy(() => import('src/content/user/Transactions')));
+const MyOrders = Loader(lazy(() => import('src/content/user/MyOrders')));
+
+// Admin
+const AdminDashboard = Loader(
+  lazy(() => import('src/content/admin/Dashboard'))
+);
+const Users = Loader(lazy(() => import('src/content/admin/Users')));
+const Rashi = Loader(lazy(() => import('src/content/admin/Rashi')));
+const WithdrawList = Loader(lazy(() => import('src/content/admin/Withdraw')));
 
 // Dashboards
 
@@ -33,9 +54,9 @@ const Crypto = Loader(lazy(() => import('src/content/dashboards/Crypto')));
 const Messenger = Loader(
   lazy(() => import('src/content/applications/Messenger'))
 );
-const Transactions = Loader(
-  lazy(() => import('src/content/applications/Transactions'))
-);
+// const Transactions = Loader(
+//   lazy(() => import('src/content/applications/Transactions'))
+// );
 const UserProfile = Loader(
   lazy(() => import('src/content/applications/Users/profile'))
 );
@@ -84,16 +105,20 @@ const StatusMaintenance = Loader(
 
 const routes: RouteObject[] = [
   {
-    path: '',
+    path: ROUTES.Dashboard,
     element: <BaseLayout />,
     children: [
       {
-        path: '/',
-        element: <Overview />
+        path: ROUTES.Dashboard,
+        element: <Dashboard />
       },
       {
-        path: 'overview',
-        element: <Navigate to="/" replace />
+        path: ROUTES.MyOrders,
+        element: <MyOrders />
+      },
+      {
+        path: ROUTES.Transactions,
+        element: <Transactions />
       },
       {
         path: 'status',
@@ -127,22 +152,68 @@ const routes: RouteObject[] = [
     ]
   },
   {
-    path: 'login',
+    path: ROUTES.Login,
     element: <BaseLayout />,
     children: [
       {
-        path: '/login',
+        path: ROUTES.Login,
         element: <Login />
       }
     ]
   },
   {
-    path: 'signup',
+    path: ROUTES.Signup,
     element: <BaseLayout />,
     children: [
       {
-        path: '/signup',
+        path: ROUTES.Signup,
         element: <Signup />
+      }
+    ]
+  },
+  {
+    path: ROUTES.ForgotPassword,
+    element: <BaseLayout />,
+    children: [
+      {
+        path: ROUTES.ForgotPassword,
+        element: <ForgotPassword />
+      }
+    ]
+  },
+  {
+    path: ROUTES.TnC,
+    element: <BaseLayout />,
+    children: [
+      {
+        path: ROUTES.TnC,
+        element: <TermsAndConditions />
+      }
+    ]
+  },
+  {
+    path: 'admin',
+    element: <SidebarLayout />,
+    children: [
+      {
+        path: '',
+        element: <Navigate to="dashboard" replace />
+      },
+      {
+        path: 'dashboard',
+        element: <AdminDashboard />
+      },
+      {
+        path: 'users',
+        element: <Users />
+      },
+      {
+        path: 'rashi',
+        element: <Rashi />
+      },
+      {
+        path: 'withdraw',
+        element: <WithdrawList />
       }
     ]
   },

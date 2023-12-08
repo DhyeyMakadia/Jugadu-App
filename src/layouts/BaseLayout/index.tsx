@@ -1,23 +1,53 @@
 import { FC, ReactNode } from 'react';
 import PropTypes from 'prop-types';
-import { Outlet } from 'react-router-dom';
-
-import { Box } from '@mui/material';
+import { Outlet, useLocation } from 'react-router-dom';
+import _ from 'lodash';
+import { Box, useTheme } from '@mui/material';
+import Header from '../SidebarLayout/Header';
+import { PublicPages } from 'src/utils/constants';
 
 interface BaseLayoutProps {
   children?: ReactNode;
 }
 
 const BaseLayout: FC<BaseLayoutProps> = ({ children }) => {
+  const theme = useTheme();
+  const { pathname } = useLocation();
+  const isHeader = !pathname.split('/').some((r) => PublicPages.includes(`/${r}`));
+  
   return (
-    <Box
-      sx={{
-        flex: 1,
-        height: '100%'
-      }}
-    >
-      {children || <Outlet />}
-    </Box>
+    <>
+      {isHeader ? (
+        <Box
+          sx={{
+            flex: 1,
+            height: '100%'
+          }}
+        >
+          <Header />
+          <Box
+            sx={{
+              position: 'relative',
+              zIndex: 5,
+              display: 'block',
+              flex: 1,
+              pt: `${theme.header.height}`
+            }}
+          >
+            <Box display="block">{children || <Outlet />}</Box>
+          </Box>
+        </Box>
+      ) : (
+        <Box
+          sx={{
+            flex: 1,
+            height: '100%'
+          }}
+        >
+          {children || <Outlet />}
+        </Box>
+      )}
+    </>
   );
 };
 

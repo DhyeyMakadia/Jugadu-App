@@ -1,18 +1,9 @@
-import {
-  Box,
-  Card,
-  Typography,
-  Container,
-  Divider,
-  Button,
-  FormControl,
-  OutlinedInput,
-  InputAdornment
-} from '@mui/material';
+import { Box, Typography, Container, Button } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
-import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 
 import { styled } from '@mui/material/styles';
+import { ROUTES } from 'src/utils/routes';
+import { useNavigate } from 'react-router';
 
 const MainContent = styled(Box)(
   ({ theme }) => `
@@ -26,19 +17,8 @@ const MainContent = styled(Box)(
 `
 );
 
-const OutlinedInputWrapper = styled(OutlinedInput)(
-  ({ theme }) => `
-    background-color: ${theme.colors.alpha.white[100]};
-`
-);
-
-const ButtonSearch = styled(Button)(
-  ({ theme }) => `
-    margin-right: -${theme.spacing(1)};
-`
-);
-
 function Status404() {
+  const navigate = useNavigate();
   return (
     <>
       <Helmet>
@@ -57,35 +37,17 @@ function Status404() {
               fontWeight="normal"
               sx={{ mb: 4 }}
             >
-              It's on us, we moved the content to a different page. The search
+              It's on us, we moved the content to a different page. The button
               below should help!
             </Typography>
           </Box>
-          <Container maxWidth="sm">
-            <Card sx={{ textAlign: 'center', mt: 3, p: 4 }}>
-              <FormControl variant="outlined" fullWidth>
-                <OutlinedInputWrapper
-                  type="text"
-                  placeholder="Search terms here..."
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <ButtonSearch variant="contained" size="small">
-                        Search
-                      </ButtonSearch>
-                    </InputAdornment>
-                  }
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <SearchTwoToneIcon />
-                    </InputAdornment>
-                  }
-                />
-              </FormControl>
-              <Divider sx={{ my: 4 }}>OR</Divider>
-              <Button href="/overview" variant="outlined">
-                Go to homepage
-              </Button>
-            </Card>
+          <Container sx={{ textAlign: 'center', mt: 3, p: 4 }} maxWidth="sm">
+            <Button
+              variant="outlined"
+              onClick={() => navigate(ROUTES.Dashboard)}
+            >
+              Go to homepage
+            </Button>
           </Container>
         </Container>
       </MainContent>

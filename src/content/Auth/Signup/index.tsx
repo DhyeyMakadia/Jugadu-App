@@ -8,14 +8,13 @@ import {
   Divider,
   FormHelperText,
   Grid,
-  Link,
   TextField,
   Typography
 } from '@mui/material';
 import { Box } from '@mui/system';
 import { ErrorMessage, Form, Formik, FormikValues } from 'formik';
 import { Helmet } from 'react-helmet-async';
-import { NavLink as RouterLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink as RouterLink, useNavigate } from 'react-router-dom';
 import { preventNonNumericalInput } from 'src/utils/helperFunctions';
 import { ValidationMessage } from 'src/utils/resources';
 import * as Yup from 'yup';
@@ -229,7 +228,7 @@ const Signup = () => {
                               <Typography component="span" variant="body1">
                                 I Agree all statements in&nbsp;
                               </Typography>
-                              <Link href="#">Terms of service</Link>
+                              <Link to={ROUTES.TnC}>Terms of service</Link>
                             </Grid>
                             <Grid item xs={12} className="create-account">
                               <Button

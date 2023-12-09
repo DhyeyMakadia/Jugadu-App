@@ -143,7 +143,7 @@ const WithdrawDataTable: FC<Props> = ({ withdrawRequests, refetch }) => {
                       gutterBottom
                       noWrap
                     >
-                      {request.userDetails.name}
+                      {request?.userDetails?.name}
                     </Typography>
                     {/* <Typography variant="body2" color="text.secondary" noWrap>
                       {format(rashi.name, 'MMMM dd yyyy')}
@@ -157,7 +157,7 @@ const WithdrawDataTable: FC<Props> = ({ withdrawRequests, refetch }) => {
                       gutterBottom
                       noWrap
                     >
-                      {request.userDetails.email}
+                      {request?.userDetails?.email}
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -169,7 +169,7 @@ const WithdrawDataTable: FC<Props> = ({ withdrawRequests, refetch }) => {
                       gutterBottom
                       noWrap
                     >
-                      ₹ {request.request_amount}
+                      ₹ {request?.request_amount ?? 0}
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -180,11 +180,11 @@ const WithdrawDataTable: FC<Props> = ({ withdrawRequests, refetch }) => {
                       gutterBottom
                       noWrap
                     >
-                      {request.userDetails.mobile_number}
+                      {request?.userDetails?.mobile_number}
                     </Typography>
                   </TableCell>
                   <TableCell align="center">
-                    {getStatusLabel(request.accept_decline)}
+                    {getStatusLabel(request?.accept_decline)}
                   </TableCell>
                   <TableCell align="center">
                     {request.accept_decline === null ? (

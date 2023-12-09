@@ -1,5 +1,5 @@
 const environment = {
-  apiUrl: "http://localhost:8000/api/",
+  apiUrl: "https://api.jugadu.cloud/api/",
 };
 
 export default environment;

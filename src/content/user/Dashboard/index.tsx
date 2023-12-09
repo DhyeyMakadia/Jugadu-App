@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Card,
   CardMedia,
@@ -10,10 +10,9 @@ import {
   Grid
 } from '@mui/material';
 import PlaceBidDialog from './PlaceBidDialog';
-import RashiService from 'src/services/rashi/index';
 import BidsService from 'src/services/bids/index';
-import { RashiObject } from 'src/services/types/rashi';
 import { GetAllUserRashiObject } from 'src/services/types/bids';
+import Timer from 'src/components/Timer';
 
 const Dashboard = () => {
   const [placeBidDialogOpen, setPlaceBidDialogOpen] = useState<{
@@ -41,12 +40,34 @@ const Dashboard = () => {
 
   return (
     <Container sx={{ width: '100%' }} maxWidth={false}>
-      <Grid container xs={12} spacing={2} margin={1}>
+      <Grid
+        container
+        justifyContent="space-between"
+        alignItems="center"
+        sx={{ mb: 1, mt: 3 }}
+      >
+        <Grid item>
+          <Typography variant="h3" component="h3" gutterBottom>
+            Dashboard
+          </Typography>
+          <Typography variant="subtitle2">
+            Bids End in: <Timer />
+          </Typography>
+        </Grid>
+      </Grid>
+      <Grid container xs={12} spacing={2} margin={1} sx={{ pb: 3 }}>
         {rashiData.length > 0 &&
           rashiData.map((rashi, index) => {
             return (
               <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
-                <Card sx={{ maxWidth: 400, height: '100%', display: "flex", flexDirection: "column" }}>
+                <Card
+                  sx={{
+                    maxWidth: 400,
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column'
+                  }}
+                >
                   <CardMedia
                     sx={{ height: 200 }}
                     image={rashi.image}

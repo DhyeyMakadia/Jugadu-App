@@ -2,7 +2,6 @@ import Cookies from 'js-cookie';
 import React, { FC, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { ThemeContext } from 'src/theme/ThemeProvider';
-import { PublicPages } from 'src/utils/constants';
 import { ROUTES } from 'src/utils/routes';
 
 type Props = {

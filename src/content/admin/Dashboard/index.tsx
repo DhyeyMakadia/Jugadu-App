@@ -1,18 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
 import PageHeader from './PageHeader';
 import Footer from 'src/components/Footer';
 import {
-  Avatar,
-  Button,
   Card,
-  CardActions,
   CardContent,
-  CardHeader,
   CardMedia,
   Container,
-  Divider,
   Grid,
   Typography
 } from '@mui/material';

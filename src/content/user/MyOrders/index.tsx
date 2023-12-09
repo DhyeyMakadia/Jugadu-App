@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import BidService from 'src/services/bids/index';
 import TodaysWinningTable from './TodaysWinningTable';
 import { BidsWinnerListObject } from 'src/services/types/bids';
+import { Helmet } from 'react-helmet-async';
 
 const MyOrders = () => {
   const [bidsData, setBidsData] = useState([]);
@@ -41,26 +42,31 @@ const MyOrders = () => {
   }, []);
 
   return (
-    <Container sx={{ maxWidth: '100%', mt: 3 }} maxWidth={false}>
-      <Grid
-        container
-        direction="row"
-        justifyContent="center"
-        alignItems="stretch"
-        spacing={3}
-      >
-        <Grid item xs={6}>
-          <Card>
-            <MyBidsTable bids={bidsData} />
-          </Card>
+    <>
+      <Helmet>
+        <title>My Orders</title>
+      </Helmet>
+      <Container sx={{ maxWidth: '100%', mt: 3 }} maxWidth={false}>
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="stretch"
+          spacing={3}
+        >
+          <Grid item xs={6}>
+            <Card>
+              <MyBidsTable bids={bidsData} />
+            </Card>
+          </Grid>
+          <Grid item xs={6}>
+            <Card>
+              <TodaysWinningTable data={winningData} />
+            </Card>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <Card>
-            <TodaysWinningTable data={winningData} />
-          </Card>
-        </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </>
   );
 };
 

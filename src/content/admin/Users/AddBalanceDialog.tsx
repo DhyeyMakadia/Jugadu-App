@@ -1,32 +1,15 @@
 import React, { FC, useState } from 'react';
 import {
-  Avatar,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   FormControl,
-  FormHelperText,
   Grid,
-  InputAdornment,
-  InputLabel,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  OutlinedInput,
   Slide,
-  TextField,
-  useMediaQuery
-} from '@mui/material';
-import { blue } from '@mui/material/colors';
+  TextField} from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
-import { useTheme } from '@mui/material/styles';
-import { styled } from '@mui/material/styles';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { RashiObject } from 'src/services/types/rashi';
 import WalletService from 'src/services/wallet/index';
 import { toast } from 'react-toastify';
 

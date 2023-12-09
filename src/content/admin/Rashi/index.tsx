@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Container, Grid } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
 import Footer from 'src/components/Footer';
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
-import RecentOrders from 'src/content/applications/Transactions/RecentOrders';
 import PageHeader from 'src/content/admin/Rashi/PageHeader';
 import RashiData from './RashiData';
 import AddRashiDialog from './AddRashiDialog';

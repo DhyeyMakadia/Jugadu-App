@@ -1,11 +1,6 @@
 import {
   Card,
   CardHeader,
-  Box,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
   Divider,
   TableContainer,
   Table,
@@ -18,7 +13,7 @@ import {
   IconButton,
   useTheme
 } from '@mui/material';
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import ConfirmDialog from 'src/components/ConfirmDialog';
 import Label from 'src/components/Label';
 import { ConfirmDialogProps } from 'src/services/types/common';

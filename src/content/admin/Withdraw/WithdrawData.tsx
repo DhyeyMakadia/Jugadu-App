@@ -5,33 +5,6 @@ import { WithDrawObject } from 'src/services/types/withdraw';
 import WithdrawService from 'src/services/withdraw/index';
 
 const WithdrawData = () => {
-  const withdrawData = [
-    {
-      id: 1,
-      name: 'Shivam Garala',
-      email: 'shivam@gmail.com',
-      mobile_number: '7988465512',
-      request_amount: '1000',
-      accept_decline: 0
-    },
-    {
-      id: 2,
-      name: 'Shivam Garala',
-      email: 'shivam@gmail.com',
-      mobile_number: '7988465512',
-      request_amount: '1000',
-      accept_decline: 1
-    },
-    {
-      id: 3,
-      name: 'Shivam Garala',
-      email: 'shivam@gmail.com',
-      mobile_number: '7988465512',
-      request_amount: '1000',
-      accept_decline: null
-    }
-  ];
-
   const [withDrawRequestData, setWithDrawRequestData] = useState<
     Array<WithDrawObject>
   >([]);

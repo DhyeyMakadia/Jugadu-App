@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useRef, useState } from 'react';
+import { ChangeEvent, FC, useRef, useState } from 'react';
 import {
   Card,
   Box,
@@ -13,30 +13,20 @@ import {
   TableHead,
   TableRow,
   TableCell,
-  Checkbox,
   TableBody,
   Typography,
   Tooltip,
   IconButton,
-  TablePagination,
   useTheme,
   List,
   ListItem,
   Popover,
   ListItemText
 } from '@mui/material';
-import { format, formatDistance, subDays } from 'date-fns';
-import numeral from 'numeral';
-import BulkActions from 'src/content/applications/Transactions/BulkActions';
 import PropTypes from 'prop-types';
 import Label from 'src/components/Label';
-import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
-import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { UsersObject, UsersResponse } from 'src/services/types/users';
-import { NavLink } from 'react-router-dom';
-import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
-import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
+import { UsersObject } from 'src/services/types/users';
 import CancelIcon from '@mui/icons-material/Cancel';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';

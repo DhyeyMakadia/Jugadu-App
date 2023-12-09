@@ -47,7 +47,10 @@ const WithdrawData = () => {
 
   return (
     <Card>
-      <WithdrawDataTable withdrawRequests={withDrawRequestData} refetch={getWithdrawRequest} />
+      <WithdrawDataTable
+        withdrawRequests={withDrawRequestData}
+        refetch={getWithdrawRequest}
+      />
     </Card>
   );
 };

@@ -8,7 +8,7 @@ import {
   SignUpResponse
 } from '../types/auth';
 import { RashiResponse } from '../types/rashi';
-import { WithDrawResponse } from '../types/withdraw';
+import { UserWithdrawResponse, WithDrawResponse } from '../types/withdraw';
 
 const controller = 'withdrawrequest/request';
 
@@ -25,6 +25,15 @@ class WithdrawService {
     withdraw_request_id: number;
   }): Promise<AxiosResponse<DEFAULT_RESPONSE_TYPE>> =>
     httpClient.post(`${controller}/reject`, payload);
+
+  CreateWithdrawRequest = async (payload: {
+    request_amount: number;
+  }): Promise<AxiosResponse<DEFAULT_RESPONSE_TYPE>> =>
+    httpClient.post(`${controller}/create`, payload);
+
+  GetUserWithdrawList = async (): Promise<
+    AxiosResponse<UserWithdrawResponse>
+  > => httpClient.get(`withdrawrequest/userRequestLists`);
 }
 
 export default new WithdrawService();

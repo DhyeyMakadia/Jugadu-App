@@ -53,6 +53,7 @@ const Login = () => {
         if (response.data) {
           Cookies.set('auth_token', response.data.data.authToken);
           Cookies.set('isAdmin', String(response.data.data.is_admin));
+          Cookies.set('LoggedInUser', String(response.data.data.name));
           setShowLoader(false);
           if (response.data.data.is_admin) {
             navigate(ROUTES.AdminDashboard);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ThemeProvider } from '@mui/material';
 import { themeCreator } from './base';
 import { StylesProvider } from '@mui/styles';
@@ -9,14 +9,17 @@ import ProtectedRoutes from 'src/components/ProtectedRoutes';
 import { PublicPages, UserPages } from 'src/utils/constants';
 import { useLocation } from 'react-router';
 import Cookies from 'js-cookie';
+import WalletService from 'src/services/wallet/index';
 
 export const ThemeContext = React.createContext(null);
 
 const ThemeProviderWrapper: React.FC = (props) => {
   const { pathname } = useLocation();
   const curThemeName = localStorage.getItem('appTheme') || 'PureLightTheme';
+  const isLoggedIn = Cookies.get('auth_token');
   const [showLoader, setShowLoader] = useState<boolean>(false);
   const [themeName, _setThemeName] = useState(curThemeName);
+  const [currentBalance, setCurrentBalance] = useState<string>('');
   const theme = themeCreator(themeName);
   const setThemeName = (themeName: string): void => {
     localStorage.setItem('appTheme', themeName);
@@ -32,10 +35,26 @@ const ThemeProviderWrapper: React.FC = (props) => {
   const isAdminPage = pathname.includes('/admin');
 
   const handleLogout = () => {
-    Cookies.remove("auth_token");
-    Cookies.remove("isAdmin");
+    Cookies.remove('auth_token');
+    Cookies.remove('isAdmin');
+    Cookies.remove('LoggedInUser');
     window.location.reload();
   };
+
+  const getCurrentBalance = () => {
+    WalletService.GetBalance().then((res) => {
+      if (res.data.success) {
+        setCurrentBalance(res.data.data[0].running_balance);
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (!!isLoggedIn) {
+      getCurrentBalance();
+    }
+  }, [isLoggedIn]);
+
   return (
     <StylesProvider injectFirst>
       {showLoader && <SuspenseLoader />}
@@ -46,7 +65,8 @@ const ThemeProviderWrapper: React.FC = (props) => {
           isPublicPage,
           isAdminPage,
           isUserPage,
-          handleLogout
+          handleLogout,
+          currentBalance
         }}
       >
         <ProtectedRoutes>

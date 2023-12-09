@@ -18,7 +18,10 @@ import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
 import HeaderButtons from './Buttons';
 import HeaderUserbox from './Userbox';
 import HeaderMenu from './Menu';
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
+import Cookies from 'js-cookie';
+import { ThemeContext } from 'src/theme/ThemeProvider';
+import { ROUTES } from 'src/utils/routes';
 
 const AdminHeaderWrapper = styled(Box)(
   ({ theme }) => `
@@ -56,8 +59,12 @@ const HeaderWrapper = styled(Box)(
 
 function Header() {
   const { sidebarToggle, toggleSidebar } = useContext(SidebarContext);
+  const { isAdminPage } = useContext(ThemeContext);
   const { pathname } = useLocation();
+  const isAdmin = Cookies.get('isAdmin');
   const theme = useTheme();
+  const navigate = useNavigate()
+
   const HeaderWrapperComponent = pathname.includes('/admin')
     ? AdminHeaderWrapper
     : HeaderWrapper;
@@ -87,28 +94,31 @@ function Header() {
         alignItems="center"
         spacing={2}
       >
-        <HeaderMenu />
+        <div onClick={() => navigate(ROUTES.Dashboard)}> Jugadu</div>
+        {/* <HeaderMenu /> */}
       </Stack>
       <Box display="flex" alignItems="center">
-        <HeaderButtons />
+        {/* <HeaderButtons /> */}
         <HeaderUserbox />
-        <Box
-          component="span"
-          sx={{
-            ml: 2,
-            display: { lg: 'none', xs: 'inline-block' }
-          }}
-        >
-          <Tooltip arrow title="Toggle Menu">
-            <IconButton color="primary" onClick={toggleSidebar}>
-              {!sidebarToggle ? (
-                <MenuTwoToneIcon fontSize="small" />
-              ) : (
-                <CloseTwoToneIcon fontSize="small" />
-              )}
-            </IconButton>
-          </Tooltip>
-        </Box>
+        {isAdmin && isAdminPage && (
+          <Box
+            component="span"
+            sx={{
+              ml: 2,
+              display: { lg: 'none', xs: 'inline-block' }
+            }}
+          >
+            <Tooltip arrow title="Toggle Menu">
+              <IconButton color="primary" onClick={toggleSidebar}>
+                {!sidebarToggle ? (
+                  <MenuTwoToneIcon fontSize="small" />
+                ) : (
+                  <CloseTwoToneIcon fontSize="small" />
+                )}
+              </IconButton>
+            </Tooltip>
+          </Box>
+        )}
       </Box>
     </HeaderWrapperComponent>
   );

@@ -24,6 +24,7 @@ import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 import { ROUTES } from 'src/utils/routes';
 import { ThemeContext } from 'src/theme/ThemeProvider';
+import Cookies from 'js-cookie';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -61,12 +62,13 @@ const UserBoxDescription = styled(Typography)(
 );
 
 function HeaderUserbox() {
-  const { handleLogout } = useContext(ThemeContext);
-  const user = {
-    name: 'Catherine Pike',
-    avatar: '/static/images/avatars/1.jpg',
-    jobtitle: 'Project Manager'
-  };
+  const { handleLogout, currentBalance } = useContext(ThemeContext);
+  const userName = Cookies.get('LoggedInUser');
+  // const user = {
+  //   name: 'Catherine Pike',
+  //   avatar: '/static/images/avatars/1.jpg',
+  //   jobtitle: 'Project Manager'
+  // };
 
   const ref = useRef<any>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -82,18 +84,18 @@ function HeaderUserbox() {
   return (
     <>
       <UserBoxButton color="secondary" ref={ref} onClick={handleOpen}>
-        <Avatar variant="rounded" alt={user.name} src={user.avatar} />
-        <Hidden mdDown>
+        {/* <Avatar variant="rounded" alt={userName} src={user.avatar} /> */}
+        {/* <Hidden mdDown> */}
           <UserBoxText>
-            <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
+            <UserBoxLabel variant="body1">{userName}</UserBoxLabel>
             <UserBoxDescription variant="body2">
-              {user.jobtitle}
+              Balance: ₹ {currentBalance}
             </UserBoxDescription>
           </UserBoxText>
-        </Hidden>
-        <Hidden smDown>
+        {/* </Hidden> */}
+        {/* <Hidden smDown> */}
           <ExpandMoreTwoToneIcon sx={{ ml: 1 }} />
-        </Hidden>
+        {/* </Hidden> */}
       </UserBoxButton>
       <Popover
         anchorEl={ref.current}
@@ -109,11 +111,11 @@ function HeaderUserbox() {
         }}
       >
         <MenuUserBox sx={{ minWidth: 210 }} display="flex">
-          <Avatar variant="rounded" alt={user.name} src={user.avatar} />
+          {/* <Avatar variant="rounded" alt={user.name} src={user.avatar} /> */}
           <UserBoxText>
-            <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
+            <UserBoxLabel variant="body1">{userName}</UserBoxLabel>
             <UserBoxDescription variant="body2">
-              {user.jobtitle}
+              Balance: ₹ {currentBalance}
             </UserBoxDescription>
           </UserBoxText>
         </MenuUserBox>

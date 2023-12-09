@@ -35,3 +35,27 @@ export type BidsListResponse = DEFAULT_RESPONSE_TYPE & {
 export type ChangeWinnerRequest = {
   zodiac_id: number;
 };
+
+export type BidsWinnerListObject = {
+  ZodiacName: string;
+  image: string;
+  time: string;
+  date: string;
+};
+
+export type BidsWinnerListResponse = DEFAULT_RESPONSE_TYPE & {
+  data: Array<BidsWinnerListObject>;
+};
+
+export type MyBidsObject = {
+  ZodiacName: string;
+  image: string;
+  time: string;
+  date: string;
+  is_win: number;
+  amount: string;
+};
+
+export type MyBidsResponse = DEFAULT_RESPONSE_TYPE & {
+  data: Array<MyBidsObject>;
+};

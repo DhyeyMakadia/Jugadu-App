@@ -16,6 +16,7 @@ import { TransitionProps } from '@mui/material/transitions';
 import BidService from 'src/services/bids/index';
 import { toast } from 'react-toastify';
 import { StatusCode } from 'src/utils/constants';
+import WithdrawService from 'src/services/withdraw/index';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -26,50 +27,46 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-type PlaceBidDialogProps = {
+type Props = {
   isOpen: boolean;
   handleClose: (x?: boolean) => void;
-  zodiacId: number;
 };
 
-const PlaceBidDialog: FC<PlaceBidDialogProps> = ({
-  isOpen,
-  handleClose,
-  zodiacId
-}) => {
+const WithdrawRequestDialog: FC<Props> = ({ handleClose, isOpen }) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-  const [bidAmount, setBidAmount] = useState<number>(500);
+  const [withdrawAmount, setWithdrawAmount] = useState<number>(0);
 
-  const handlePlaceBid = () => {
-    if (bidAmount > 0) {
-      const payload = {
-        zodiac_id: zodiacId,
-        bid_amount: bidAmount
-      };
-      BidService.PlaceBid(payload).then((res) => {
+  const handleAddWithdrawRequest = () => {
+    if (withdrawAmount > 0) {
+      WithdrawService.CreateWithdrawRequest({
+        request_amount: withdrawAmount
+      }).then((res) => {
         if (res.data.success) {
-          toast.success('Bid Placed Successfully');
+          toast.success('Withdraw Request Created Successfully');
+          setWithdrawAmount(0);
           handleClose(true);
-        } else if (res.status === StatusCode.BadRequest) {
-          toast.error(res.data.message);
         }
       });
     } else {
-      toast.error('Bid Amount must be greater than zero');
+      toast.error('Withdraw Amount must be greater than zero');
     }
   };
 
+  const handleDialogClose = () => {
+    setWithdrawAmount(0);
+    handleClose();
+  };
   return (
     <Dialog
       fullScreen={fullScreen}
-      onClose={handleClose}
+      onClose={handleDialogClose}
       open={isOpen}
       TransitionComponent={Transition}
       fullWidth
       maxWidth="sm"
     >
-      <DialogTitle>Place Bid</DialogTitle>
+      <DialogTitle>Add Withdraw Request</DialogTitle>
       <DialogContent>
         <Grid container xs={12}>
           <Grid item xs={12}>
@@ -85,7 +82,7 @@ const PlaceBidDialog: FC<PlaceBidDialogProps> = ({
                 name="amount"
                 id="amount"
                 label="Amount"
-                onChange={(e) => setBidAmount(Number(e.target.value))}
+                onChange={(e) => setWithdrawAmount(Number(e.target.value))}
                 type="number"
                 fullWidth
                 variant="standard"
@@ -98,11 +95,11 @@ const PlaceBidDialog: FC<PlaceBidDialogProps> = ({
         </Grid>
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => handleClose()}>Cancel Bid</Button>
-        <Button onClick={handlePlaceBid}>Place Bid</Button>
+        <Button onClick={handleDialogClose}>Cancel Request</Button>
+        <Button onClick={handleAddWithdrawRequest}>Add Request</Button>
       </DialogActions>
     </Dialog>
   );
 };
 
-export default PlaceBidDialog;
+export default WithdrawRequestDialog;

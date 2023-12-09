@@ -17,3 +17,14 @@ export type WithDrawObject = {
 export type WithDrawResponse = DEFAULT_RESPONSE_TYPE & {
   data: Array<WithDrawObject>;
 };
+
+export type UserWithdrawList = {
+  id: number;
+  user_id: number;
+  request_amount: string;
+  accept_decline: number;
+};
+
+export type UserWithdrawResponse = DEFAULT_RESPONSE_TYPE & {
+  data: Array<UserWithdrawList>
+}

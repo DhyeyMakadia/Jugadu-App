@@ -2,8 +2,10 @@ import { AxiosResponse } from 'axios';
 import httpClient from '../httpClient';
 import {
   BidsListResponse,
+  BidsWinnerListResponse,
   ChangeWinnerRequest,
   GetAllUserRashiResponse,
+  MyBidsResponse,
   PlaceBidRequest
 } from '../types/bids';
 import { DEFAULT_RESPONSE_TYPE } from '../types/auth';
@@ -26,6 +28,12 @@ class BidsService {
     payload: ChangeWinnerRequest
   ): Promise<AxiosResponse<DEFAULT_RESPONSE_TYPE>> =>
     httpClient.post(`${controller}/winner/manually`, payload);
+
+  GetMyBidsList = async (): Promise<AxiosResponse<MyBidsResponse>> =>
+    httpClient.get(`${controller}/mybidding/list`);
+
+  WinnerList = async (): Promise<AxiosResponse<BidsWinnerListResponse>> =>
+    httpClient.get(`${controller}/winner/list`);
 }
 
 export default new BidsService();

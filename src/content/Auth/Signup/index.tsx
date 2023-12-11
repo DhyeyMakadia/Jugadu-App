@@ -65,7 +65,7 @@ const Signup = () => {
         toast.success('User created successfully');
         navigate(ROUTES.Login);
       } else {
-        toast.error("User already exists")
+        toast.error('User already exists');
       }
     });
   };
@@ -83,30 +83,30 @@ const Signup = () => {
           spacing={4}
           height="100%"
         >
-          <Formik
-            initialValues={{
-              name: '',
-              email: '',
-              mobile_number: '',
-              password: '',
-              repeatPassword: '',
-              referral: ''
-            }}
-            validationSchema={validationSchema}
-            onSubmit={handleSignup}
-            enableReinitialize
-          >
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-              handleSubmit
-            }) => {
-              return (
-                <Form onSubmit={handleSubmit}>
-                  <Grid item md={8} xs={12} margin={2}>
+          <Grid item md={8} xs={12} margin={2}>
+            <Formik
+              initialValues={{
+                name: '',
+                email: '',
+                mobile_number: '',
+                password: '',
+                repeatPassword: '',
+                referral: ''
+              }}
+              validationSchema={validationSchema}
+              onSubmit={handleSignup}
+              enableReinitialize
+            >
+              {({
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit
+              }) => {
+                return (
+                  <Form onSubmit={handleSubmit}>
                     <Card>
                       <CardHeader title="Create an account" />
                       <Divider />
@@ -177,7 +177,7 @@ const Signup = () => {
                                 id="standard-search"
                                 name="password"
                                 label="Your Password"
-                                type="text"
+                                type="password"
                                 variant="outlined"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
@@ -193,7 +193,7 @@ const Signup = () => {
                                 id="standard-search"
                                 name="repeatPassword"
                                 label="Repeat your password"
-                                type="text"
+                                type="password"
                                 variant="outlined"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
@@ -257,11 +257,11 @@ const Signup = () => {
                         </Box>
                       </CardContent>
                     </Card>
-                  </Grid>
-                </Form>
-              );
-            }}
-          </Formik>
+                  </Form>
+                );
+              }}
+            </Formik>
+          </Grid>
         </Grid>
       </Container>
     </>

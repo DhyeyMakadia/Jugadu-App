@@ -55,7 +55,7 @@ const Dashboard = () => {
           <Grid item xs={12} md={3}>
             <Card>
               <CardMedia
-                sx={{ height: 150 }}
+                sx={{ height: 250, backgroundSize: '250px' }}
                 image={winner?.image}
                 title={winner?.name}
               />

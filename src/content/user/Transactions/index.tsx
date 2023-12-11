@@ -10,9 +10,10 @@ import WithdrawRequestDialog from './WithdrawRequestDialog';
 import { UserWithdrawList } from 'src/services/types/withdraw';
 import WithdrawRequestList from './WithdrawRequestList';
 import { Helmet } from 'react-helmet-async';
+import AddMoneyDialog from './AddMoneyDialog';
 
 const Transactions = () => {
-  const { currentBalance } = useContext(ThemeContext);
+  const { currentBalance, getCurrentBalance } = useContext(ThemeContext);
   const [transactionsData, setTransactionsData] = useState<
     Array<TransactionsObject>
   >([]);
@@ -21,6 +22,7 @@ const Transactions = () => {
   >([]);
   const [withdrawRequestDialogOpen, setWithdrawRequestDialogOpen] =
     useState<boolean>(false);
+  const [addMoneyDialogOpen, setAddMoneyDialogOpen] = useState<boolean>(false);
 
   const getTransactionData = () => {
     WalletService.GetTransactions().then((res) => {
@@ -43,6 +45,14 @@ const Transactions = () => {
       getWithdrawRequestList();
     }
     setWithdrawRequestDialogOpen(false);
+  };
+
+  const handleAddMoneyDialogClose = (success: boolean) => {
+    if (success) {
+      getTransactionData();
+      getCurrentBalance();
+    }
+    setAddMoneyDialogOpen(false);
   };
 
   useEffect(() => {
@@ -72,12 +82,20 @@ const Transactions = () => {
           </Grid>
           <Grid item>
             <Button
-              sx={{ mt: { xs: 2, md: 0 } }}
+              sx={{ mt: { xs: 2, md: 0 }, mr: 1 }}
               variant="contained"
               startIcon={<AddTwoToneIcon fontSize="small" />}
               onClick={() => setWithdrawRequestDialogOpen(true)}
             >
               Add WithDraw Request
+            </Button>
+            <Button
+              sx={{ mt: { xs: 2, md: 0 } }}
+              variant="contained"
+              startIcon={<AddTwoToneIcon fontSize="small" />}
+              onClick={() => setAddMoneyDialogOpen(true)}
+            >
+              Add Money
             </Button>
           </Grid>
         </Grid>
@@ -102,6 +120,10 @@ const Transactions = () => {
         <WithdrawRequestDialog
           isOpen={withdrawRequestDialogOpen}
           handleClose={handleWithdrawDialogClose}
+        />
+        <AddMoneyDialog
+          isOpen={addMoneyDialogOpen}
+          handleClose={handleAddMoneyDialogClose}
         />
       </Container>
     </>

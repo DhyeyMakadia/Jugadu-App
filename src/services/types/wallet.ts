@@ -5,6 +5,10 @@ export type AddBalanceRequest = {
   amount: number;
 };
 
+export type UserAddBalanceRequest = {
+  amount: number;
+};
+
 export type TransactionsObject = {
   amount: string;
   debit_credit: 0 | 1;

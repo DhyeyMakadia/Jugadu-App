@@ -44,11 +44,19 @@ const Dashboard = () => {
       <Helmet>
         <title>Dashboard</title>
       </Helmet>
-      <Container sx={{ width: '100%' }} maxWidth={false}>
+      <Container
+        sx={{
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
+        }}
+        maxWidth={false}
+      >
         <Grid
           container
-          justifyContent="space-between"
-          alignItems="center"
+          // justifyContent="space-between"
+          // alignItems="center"
           sx={{ mb: 1, mt: 3 }}
         >
           <Grid item>
@@ -64,7 +72,19 @@ const Dashboard = () => {
           {rashiData?.length > 0 &&
             rashiData.map((rashi, index) => {
               return (
-                <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+                <Grid
+                  key={index}
+                  item
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  lg={3}
+                  sx={{
+                    pl: { xs: '0 !important', sm: '18px !important' },
+                    display: { xs: 'flex', sm: 'block' },
+                    justifyContent: "center"
+                  }}
+                >
                   <Card
                     sx={{
                       maxWidth: 400,
@@ -74,7 +94,7 @@ const Dashboard = () => {
                     }}
                   >
                     <CardMedia
-                      sx={{ height: 200 }}
+                      sx={{ height: 200, backgroundSize: 230 }}
                       image={rashi.image}
                       title={rashi.name}
                     />

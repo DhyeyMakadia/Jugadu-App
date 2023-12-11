@@ -66,7 +66,8 @@ const ThemeProviderWrapper: React.FC = (props) => {
           isAdminPage,
           isUserPage,
           handleLogout,
-          currentBalance
+          currentBalance,
+          getCurrentBalance
         }}
       >
         <ProtectedRoutes>

@@ -1,15 +1,8 @@
 import { AxiosResponse } from 'axios';
 import httpClient from '../httpClient';
 import {
-  DEFAULT_RESPONSE_TYPE,
-  LoginRequest,
-  LoginResponse,
-  SignUpRequest,
-  SignUpResponse
-} from '../types/auth';
-import { RashiResponse } from '../types/rashi';
-import { UsersResponse } from '../types/users';
-import { AddBalanceRequest, GetBalanceResponse, TransactionsResponse } from '../types/wallet';
+  DEFAULT_RESPONSE_TYPE} from '../types/auth';
+import { AddBalanceRequest, GetBalanceResponse, TransactionsResponse, UserAddBalanceRequest } from '../types/wallet';
 
 const controller = 'walletbalance';
 
@@ -26,6 +19,10 @@ class UserService {
   GetBalance = async (
   ): Promise<AxiosResponse<GetBalanceResponse>> =>
     httpClient.get(`${controller}/total/bid/user`);
+
+  UserAddBalance = async (payload: UserAddBalanceRequest
+  ): Promise<AxiosResponse<DEFAULT_RESPONSE_TYPE>> =>
+    httpClient.post(`${controller}/addUserBalance`, payload);
 }
 
 export default new UserService();

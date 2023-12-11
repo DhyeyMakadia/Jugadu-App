@@ -159,7 +159,7 @@ const Login = () => {
                                 fullWidth
                                 id="standard-search"
                                 label="Password"
-                                type="text"
+                                type="password"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 variant="outlined"

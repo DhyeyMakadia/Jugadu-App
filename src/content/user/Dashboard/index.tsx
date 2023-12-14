@@ -49,7 +49,9 @@ const Dashboard = () => {
           width: '100%',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center'
+          alignItems: 'center',
+          pl: { xs: '5px !important', md: '18px !important' },
+          pr: { xs: '5px !important', md: '18px !important' }
         }}
         maxWidth={false}
       >
@@ -75,26 +77,27 @@ const Dashboard = () => {
                 <Grid
                   key={index}
                   item
-                  xs={12}
-                  sm={6}
-                  md={4}
-                  lg={3}
+                  xs={6}
+                  sm={4}
+                  md={3}
+                  lg={2}
                   sx={{
                     pl: { xs: '0 !important', sm: '18px !important' },
                     display: { xs: 'flex', sm: 'block' },
-                    justifyContent: "center"
+                    justifyContent: 'center'
                   }}
                 >
                   <Card
                     sx={{
-                      maxWidth: 400,
+                      maxWidth: 200,
+                      minWidth: 160,
                       height: '100%',
                       display: 'flex',
                       flexDirection: 'column'
                     }}
                   >
                     <CardMedia
-                      sx={{ height: 200, backgroundSize: 230 }}
+                      sx={{ height: 175, backgroundSize: 210 }}
                       image={rashi.image}
                       title={rashi.name}
                     />
@@ -106,14 +109,14 @@ const Dashboard = () => {
                         flexGrow: 1
                       }}
                     >
-                      <CardContent>
-                        <Typography gutterBottom variant="h3" component="div">
+                      <CardContent sx={{ p: 0 }}>
+                        {/* <Typography gutterBottom variant="h3" component="div">
                           {rashi.name}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        </Typography> */}
+                        {/* <Typography variant="body2" color="text.secondary">
                           May the celestial dance of the stars illuminate your
                           path with joy, love, and endless possibilities.
-                        </Typography>
+                        </Typography> */}
                         {rashi.bid_amount > 0 && (
                           <>
                             <br />

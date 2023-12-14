@@ -14,6 +14,11 @@ import BidsService from 'src/services/bids/index';
 import { GetAllUserRashiObject } from 'src/services/types/bids';
 import Timer from 'src/components/Timer';
 import { Helmet } from 'react-helmet-async';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import {
+  Autoplay,
+  EffectCreative} from 'swiper/modules';
 
 const Dashboard = () => {
   const [placeBidDialogOpen, setPlaceBidDialogOpen] = useState<{
@@ -69,6 +74,41 @@ const Dashboard = () => {
               Bids End in: <Timer />
             </Typography>
           </Grid>
+          <Swiper
+            spaceBetween={30}
+            slidesPerView={1}
+            centeredSlides={true}
+            loop={true}
+            style={{ backgroundColor: 'white', marginTop: "10px" }}
+            autoplay={{
+              delay: 5000
+            }}
+            grabCursor={true}
+            effect={'creative'}
+            creativeEffect={{
+              prev: {
+                shadow: false,
+                translate: [0, 0, -400]
+              },
+              next: {
+                translate: ['100%', 0, 0]
+              }
+            }}
+            modules={[Autoplay, EffectCreative]}
+            className="mySwiper"
+          >
+            {rashiData?.length > 0 &&
+              rashiData.map((i, index) => (
+                <SwiperSlide key={index}>
+                  <img
+                    src={i?.image}
+                    style={{ objectFit: 'contain' }}
+                    width="100%"
+                    height="300px"
+                  />
+                </SwiperSlide>
+              ))}
+          </Swiper>
         </Grid>
         <Grid container xs={12} spacing={2} margin={1} sx={{ pb: 3 }}>
           {rashiData?.length > 0 &&
@@ -89,7 +129,7 @@ const Dashboard = () => {
                 >
                   <Card
                     sx={{
-                      maxWidth: 200,
+                      // maxWidth: 200,
                       minWidth: 160,
                       height: '100%',
                       display: 'flex',
@@ -97,7 +137,7 @@ const Dashboard = () => {
                     }}
                   >
                     <CardMedia
-                      sx={{ height: 175, backgroundSize: 210 }}
+                      sx={{ height: 175, backgroundSize: 200 }}
                       image={rashi.image}
                       title={rashi.name}
                     />

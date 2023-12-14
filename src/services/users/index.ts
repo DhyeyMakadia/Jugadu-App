@@ -7,14 +7,19 @@ import {
   SignUpRequest,
   SignUpResponse
 } from '../types/auth';
-import { RashiResponse } from '../types/rashi';
-import { UsersResponse } from '../types/users';
+import { MyProfileResponse, ReferralListResponse, UsersResponse } from '../types/users';
 
 const controller = 'user';
 
 class UserService {
   GetAllUsers = async (): Promise<AxiosResponse<UsersResponse>> =>
     httpClient.get(`${controller}/readAll`);
+
+  ProfileDetails = async (): Promise<AxiosResponse<MyProfileResponse>> =>
+    httpClient.get(`${controller}/readMyProfile`);
+
+  GetReferralDetails = async (): Promise<AxiosResponse<ReferralListResponse>> =>
+    httpClient.get(`${controller}/referralUsers/listing`);
 
   UpdateUserStatus = async (
     id: number,

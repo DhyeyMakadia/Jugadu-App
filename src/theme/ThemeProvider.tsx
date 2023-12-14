@@ -19,7 +19,7 @@ const ThemeProviderWrapper: React.FC = (props) => {
   const isLoggedIn = Cookies.get('auth_token');
   const [showLoader, setShowLoader] = useState<boolean>(false);
   const [themeName, _setThemeName] = useState(curThemeName);
-  const [currentBalance, setCurrentBalance] = useState<string>('');
+  const [currentBalance, setCurrentBalance] = useState<string>('0');
   const theme = themeCreator(themeName);
   const setThemeName = (themeName: string): void => {
     localStorage.setItem('appTheme', themeName);

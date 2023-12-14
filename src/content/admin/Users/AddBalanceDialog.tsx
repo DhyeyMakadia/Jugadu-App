@@ -44,7 +44,6 @@ const AddBalanceDialog: FC<AddBalanceDialogProps> = ({
         refetch();
       }
     });
-    console.log(id, amount);
   };
   return (
     <Dialog

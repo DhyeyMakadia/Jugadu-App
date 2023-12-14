@@ -130,52 +130,53 @@ const TransactionTable: FC<Props> = ({ transactions }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredTransactions.map((transaction, index) => {
-              return (
-                <TableRow hover key={index}>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {transaction.date}
-                    </Typography>
-                    {/* <Typography variant="body2" color="text.secondary" noWrap>
+            {filteredTransactions.length > 0 &&
+              filteredTransactions.map((transaction, index) => {
+                return (
+                  <TableRow hover key={index}>
+                    <TableCell>
+                      <Typography
+                        variant="body1"
+                        fontWeight="bold"
+                        color="text.primary"
+                        gutterBottom
+                        noWrap
+                      >
+                        {transaction.date}
+                      </Typography>
+                      {/* <Typography variant="body2" color="text.secondary" noWrap>
                       {format(user.name, 'MMMM dd yyyy')}
                     </Typography> */}
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {transaction.time}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    {getStatusLabel(transaction.debit_credit)}
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      // align="center"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      ₹ {transaction.amount}
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
+                    </TableCell>
+                    <TableCell>
+                      <Typography
+                        variant="body1"
+                        fontWeight="bold"
+                        color="text.primary"
+                        gutterBottom
+                        noWrap
+                      >
+                        {transaction.time}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      {getStatusLabel(transaction.debit_credit)}
+                    </TableCell>
+                    <TableCell>
+                      <Typography
+                        variant="body1"
+                        fontWeight="bold"
+                        // align="center"
+                        color="text.primary"
+                        gutterBottom
+                        noWrap
+                      >
+                        ₹ {transaction.amount}
+                      </Typography>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>

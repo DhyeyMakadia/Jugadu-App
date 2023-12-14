@@ -56,7 +56,6 @@ const PageHeader: FC<Props> = ({ rashiList, winningRashi, refetch }) => {
           blurOnSelect
           value={selectedRashi}
           onChange={(e, newValue: Options) => {
-            console.log(newValue);
             handleChangeWinner(newValue);
           }}
           options={rashiList}

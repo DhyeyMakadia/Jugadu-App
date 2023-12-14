@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -16,6 +16,7 @@ import { TransitionProps } from '@mui/material/transitions';
 import BidService from 'src/services/bids/index';
 import { toast } from 'react-toastify';
 import { StatusCode } from 'src/utils/constants';
+import { ThemeContext } from 'src/theme/ThemeProvider';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -38,6 +39,7 @@ const PlaceBidDialog: FC<PlaceBidDialogProps> = ({
   zodiacId
 }) => {
   const theme = useTheme();
+  const { getCurrentBalance } = useContext(ThemeContext)
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
   const [bidAmount, setBidAmount] = useState<number>(500);
 
@@ -50,6 +52,7 @@ const PlaceBidDialog: FC<PlaceBidDialogProps> = ({
       BidService.PlaceBid(payload).then((res) => {
         if (res.data.success) {
           toast.success('Bid Placed Successfully');
+          getCurrentBalance()
           handleClose(true);
         } else if (res.status === StatusCode.BadRequest) {
           toast.error(res.data.message);

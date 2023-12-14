@@ -159,7 +159,6 @@ const UsersDataTable: FC<UsersDataTableProps> = ({
     } else {
       payload.status = 0;
     }
-    console.log(id, payload);
     UserService.UpdateUserStatus(id, payload).then((res) => {
       if (res.data.success) {
         toast.success('User Status Updated Successfully');

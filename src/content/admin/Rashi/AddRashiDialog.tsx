@@ -132,7 +132,6 @@ const AddRashiDialog: FC<AddRashiDialogProps> = ({
           handleSubmit,
           setFieldValue
         }) => {
-          console.log(errors, values);
           const fileName = values?.image?.target?.files[0]?.name;
           return (
             <form onSubmit={handleSubmit} encType="multipart/formdata">

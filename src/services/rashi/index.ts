@@ -22,7 +22,6 @@ class RashiService {
   AddRashi = async (
     payload: AddRashiRequest
   ): Promise<AxiosResponse<AddRashiResponse>> => {
-    console.log('payload', payload.get('image'));
     return httpClient.post(`${controller}/create`, payload, {
       headers: {
         'Content-Type': 'multipart/form-data'

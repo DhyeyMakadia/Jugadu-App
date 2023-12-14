@@ -14,7 +14,6 @@ const ProtectedRoutes: FC<Props> = ({ children }) => {
   const isAdmin = parseInt(Cookies.get('isAdmin')) === 1;
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  console.log("protect", isAdminPage)
   React.useEffect(() => {
     if (token) {
       if (!isAdmin && isAdminPage) {

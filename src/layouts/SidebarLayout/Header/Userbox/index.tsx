@@ -25,6 +25,11 @@ import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 import { ROUTES } from 'src/utils/routes';
 import { ThemeContext } from 'src/theme/ThemeProvider';
 import Cookies from 'js-cookie';
+import ProfileDialog from 'src/components/ProfileDialog';
+import HowToPlayDialog from 'src/components/HowToPlayDialog';
+import PersonIcon from '@mui/icons-material/Person';
+import ViewStreamIcon from '@mui/icons-material/ViewStream';
+import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -64,14 +69,10 @@ const UserBoxDescription = styled(Typography)(
 function HeaderUserbox() {
   const { handleLogout, currentBalance } = useContext(ThemeContext);
   const userName = Cookies.get('LoggedInUser');
-  // const user = {
-  //   name: 'Catherine Pike',
-  //   avatar: '/static/images/avatars/1.jpg',
-  //   jobtitle: 'Project Manager'
-  // };
-
   const ref = useRef<any>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
+  const [profileDialogOpen, setProfileDialogOpen] = useState<boolean>(false);
+  const [howToPlayOpen, setHowToPlayOpen] = useState<boolean>(false);
 
   const handleOpen = (): void => {
     setOpen(true);
@@ -81,20 +82,30 @@ function HeaderUserbox() {
     setOpen(false);
   };
 
+  const handleProfileDialogOpen = () => {
+    setProfileDialogOpen(true);
+    handleClose();
+  };
+
+  const handleHowToPlayDialog = () => {
+    setHowToPlayOpen(true);
+    handleClose();
+  };
+
   return (
     <>
       <UserBoxButton color="secondary" ref={ref} onClick={handleOpen}>
         {/* <Avatar variant="rounded" alt={userName} src={user.avatar} /> */}
         {/* <Hidden mdDown> */}
-          <UserBoxText>
-            <UserBoxLabel variant="body1">{userName}</UserBoxLabel>
-            <UserBoxDescription variant="body2">
-              Balance: ₹ {currentBalance}
-            </UserBoxDescription>
-          </UserBoxText>
+        <UserBoxText>
+          <UserBoxLabel variant="body1">{userName}</UserBoxLabel>
+          <UserBoxDescription variant="body2">
+            Balance: ₹ {currentBalance}
+          </UserBoxDescription>
+        </UserBoxText>
         {/* </Hidden> */}
         {/* <Hidden smDown> */}
-          <ExpandMoreTwoToneIcon sx={{ ml: 1 }} />
+        <ExpandMoreTwoToneIcon sx={{ ml: 1 }} />
         {/* </Hidden> */}
       </UserBoxButton>
       <Popover
@@ -111,7 +122,6 @@ function HeaderUserbox() {
         }}
       >
         <MenuUserBox sx={{ minWidth: 210 }} display="flex">
-          {/* <Avatar variant="rounded" alt={user.name} src={user.avatar} /> */}
           <UserBoxText>
             <UserBoxLabel variant="body1">{userName}</UserBoxLabel>
             <UserBoxDescription variant="body2">
@@ -121,10 +131,10 @@ function HeaderUserbox() {
         </MenuUserBox>
         <Divider sx={{ mb: 0 }} />
         <List sx={{ p: 1 }} component="nav">
-          {/* <ListItem button to="/management/profile/details" component={NavLink}>
-            <AccountBoxTwoToneIcon fontSize="small" />
+          <ListItem button onClick={handleProfileDialogOpen}>
+            <PersonIcon fontSize="small" />
             <ListItemText primary="My Profile" />
-          </ListItem> */}
+          </ListItem>
           <ListItem
             button
             to={ROUTES.MyOrders}
@@ -143,6 +153,19 @@ function HeaderUserbox() {
             <AccountTreeTwoToneIcon fontSize="small" />
             <ListItemText primary="Transactions" />
           </ListItem>
+          <ListItem
+            button
+            to={ROUTES.ReferralList}
+            component={NavLink}
+            onClick={handleClose}
+          >
+            <ViewStreamIcon fontSize="small" />
+            <ListItemText primary="Referral List" />
+          </ListItem>
+          <ListItem button onClick={handleHowToPlayDialog}>
+            <ContactSupportIcon fontSize="small" />
+            <ListItemText primary="How to Play" />
+          </ListItem>
         </List>
         <Divider />
         <Box sx={{ m: 1 }}>
@@ -152,6 +175,14 @@ function HeaderUserbox() {
           </Button>
         </Box>
       </Popover>
+      <ProfileDialog
+        isOpen={profileDialogOpen}
+        handleClose={() => setProfileDialogOpen(false)}
+      />
+      <HowToPlayDialog
+        isOpen={howToPlayOpen}
+        handleClose={() => setHowToPlayOpen(false)}
+      />
     </>
   );
 }

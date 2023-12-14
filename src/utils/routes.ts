@@ -12,4 +12,5 @@ export const ROUTES = {
   AdminRashi: "/admin/rashi",
   AdminWithdraw: "/admin/withdraw",
   NotFound: "/404",
+  ReferralList: "/referrals"
 }

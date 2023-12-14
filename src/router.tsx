@@ -35,6 +35,7 @@ const Transactions = Loader(
   lazy(() => import('src/content/user/Transactions'))
 );
 const MyOrders = Loader(lazy(() => import('src/content/user/MyOrders')));
+const ReferralList = Loader(lazy(() => import('src/content/user/ReferralList')));
 
 // Admin
 const AdminDashboard = Loader(
@@ -74,6 +75,10 @@ const routes: RouteObject[] = [
       {
         path: ROUTES.Transactions,
         element: <Transactions />
+      },
+      {
+        path: ROUTES.ReferralList,
+        element: <ReferralList />
       },
       {
         path: 'status',

@@ -40,3 +40,8 @@ export type ReferralListObject = {
 export type ReferralListResponse = DEFAULT_RESPONSE_TYPE & {
   data: Array<ReferralListObject>;
 };
+
+export type ChangePasswordRequest = {
+  old_password: string;
+  new_password: string;
+};

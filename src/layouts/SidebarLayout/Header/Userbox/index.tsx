@@ -30,6 +30,8 @@ import HowToPlayDialog from 'src/components/HowToPlayDialog';
 import PersonIcon from '@mui/icons-material/Person';
 import ViewStreamIcon from '@mui/icons-material/ViewStream';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+import ChangePasswordDialog from 'src/components/ChangePasswordDialog';
+import KeyIcon from '@mui/icons-material/Key';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -73,6 +75,8 @@ function HeaderUserbox() {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [profileDialogOpen, setProfileDialogOpen] = useState<boolean>(false);
   const [howToPlayOpen, setHowToPlayOpen] = useState<boolean>(false);
+  const [changePasswordDialogOpen, setChangePasswordDialogOpen] =
+    useState<boolean>(false);
 
   const handleOpen = (): void => {
     setOpen(true);
@@ -89,6 +93,11 @@ function HeaderUserbox() {
 
   const handleHowToPlayDialog = () => {
     setHowToPlayOpen(true);
+    handleClose();
+  };
+
+  const handleChangePasswordDialog = () => {
+    setChangePasswordDialogOpen(true);
     handleClose();
   };
 
@@ -134,6 +143,10 @@ function HeaderUserbox() {
           <ListItem button onClick={handleProfileDialogOpen}>
             <PersonIcon fontSize="small" />
             <ListItemText primary="My Profile" />
+          </ListItem>
+          <ListItem button onClick={handleChangePasswordDialog}>
+            <KeyIcon fontSize="small" />
+            <ListItemText primary="Change Password" />
           </ListItem>
           <ListItem
             button
@@ -182,6 +195,10 @@ function HeaderUserbox() {
       <HowToPlayDialog
         isOpen={howToPlayOpen}
         handleClose={() => setHowToPlayOpen(false)}
+      />
+      <ChangePasswordDialog
+        isOpen={changePasswordDialogOpen}
+        handleClose={() => setChangePasswordDialogOpen(false)}
       />
     </>
   );

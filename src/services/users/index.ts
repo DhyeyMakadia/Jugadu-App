@@ -1,13 +1,8 @@
 import { AxiosResponse } from 'axios';
 import httpClient from '../httpClient';
 import {
-  DEFAULT_RESPONSE_TYPE,
-  LoginRequest,
-  LoginResponse,
-  SignUpRequest,
-  SignUpResponse
-} from '../types/auth';
-import { MyProfileResponse, ReferralListResponse, UsersResponse } from '../types/users';
+  DEFAULT_RESPONSE_TYPE} from '../types/auth';
+import { ChangePasswordRequest, MyProfileResponse, ReferralListResponse, UsersResponse } from '../types/users';
 
 const controller = 'user';
 
@@ -26,6 +21,11 @@ class UserService {
     payload: { status: number }
   ): Promise<AxiosResponse<DEFAULT_RESPONSE_TYPE>> =>
     httpClient.put(`${controller}/update/${id}`, payload);
+
+  ChangePassword = async (
+    payload: ChangePasswordRequest
+  ): Promise<AxiosResponse<DEFAULT_RESPONSE_TYPE>> =>
+    httpClient.post(`${controller}/newPassword`, payload);
 }
 
 export default new UserService();

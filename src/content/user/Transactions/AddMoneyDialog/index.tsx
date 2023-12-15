@@ -59,7 +59,7 @@ const AddMoneyDialog: FC<Props> = ({ handleClose, isOpen }) => {
             .then((result) => {
               if (result.isConfirmed) {
                 const message = encodeURI(
-                  `Hello admin, \n\nI Need to add ${addMoneyAmount} Rupees to my Jugadu Wallet. \n\nThanks.`
+                  `Hello admin, \n\nI Need to add ${addMoneyAmount} Rupees to my SP Rashi FAL Wallet. \n\nThanks.`
                 );
                 window.open(
                   `https://wa.me/${environment.contact}?text=${message}`

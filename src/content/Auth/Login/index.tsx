@@ -27,8 +27,8 @@ import { useContext } from 'react';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setShowLoader } = useContext(ThemeContext)
-  
+  const { setShowLoader } = useContext(ThemeContext);
+
   const validationSchema = Yup.object().shape({
     mobile_number: Yup.string()
       .length(10, 'Mobile Number must of 10 Characters')
@@ -58,7 +58,7 @@ const Login = () => {
           if (response.data.data.is_admin) {
             navigate(ROUTES.AdminDashboard);
             toast.success(ValidationMessage.SignInSuccess);
-          } else  {
+          } else {
             navigate(ROUTES.Dashboard);
             toast.success(ValidationMessage.SignInSuccess);
           }
@@ -102,6 +102,9 @@ const Login = () => {
           height="100%"
         >
           <Grid item md={8} xs={12}>
+            <Typography variant="h2" sx={{mb: 2}} textAlign={'center'}>
+              SP Rashi FAL
+            </Typography>
             <Formik
               initialValues={{
                 mobile_number: '',
@@ -121,7 +124,7 @@ const Login = () => {
               }) => {
                 return (
                   <Form onSubmit={handleSubmit}>
-                    <Card>
+                    <Card style={{ position: 'relative' }}>
                       <CardHeader title="Login" />
                       <Divider />
                       <CardContent>

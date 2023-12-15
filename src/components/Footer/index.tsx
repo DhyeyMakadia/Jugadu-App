@@ -18,7 +18,7 @@ function Footer() {
       >
         <Box>
           <Typography variant="subtitle1">
-            &copy; 2023 - Jugadu App
+            &copy; 2023 - SP Rashi FAL
           </Typography>
         </Box>
         <Typography
@@ -33,7 +33,7 @@ function Footer() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Jugadu Team
+            SP Rashi FAL Team
           </Link>
         </Typography>
       </Box>

@@ -13,8 +13,10 @@ interface BaseLayoutProps {
 const BaseLayout: FC<BaseLayoutProps> = ({ children }) => {
   const theme = useTheme();
   const { pathname } = useLocation();
-  const isHeader = !pathname.split('/').some((r) => PublicPages.includes(`/${r}`));
-  
+  const isHeader = !pathname
+    .split('/')
+    .some((r) => PublicPages.includes(`/${r}`));
+
   return (
     <>
       {isHeader ? (
@@ -43,6 +45,7 @@ const BaseLayout: FC<BaseLayoutProps> = ({ children }) => {
             flex: 1,
             height: '100%'
           }}
+          className={pathname === '/login' ? 'login-cover' : ''}
         >
           {children || <Outlet />}
         </Box>

@@ -33,16 +33,16 @@ const TermsAndConditions = () => {
               <Divider />
               <CardContent sx={{ py: 2, px: 4 }}>
                 <Typography variant="body1" paddingBottom={1}>
-                  Welcome to Jugadu!
+                  Welcome to SP Rashi FAL!
                 </Typography>
                 <Typography variant="body1" paddingBottom={1}>
                   These terms and conditions outline the rules and regulations
-                  for the use of Jugadu's Website, located at
+                  for the use of SP Rashi FAL's Website, located at
                   https://jugadu.co.in.
                 </Typography>
                 <Typography variant="body1" paddingBottom={1}>
                   By accessing this website we assume you accept these terms and
-                  conditions. Do not continue to use Jugadu if you do not agree
+                  conditions. Do not continue to use SP Rashi FAL if you do not agree
                   to take all of the terms and conditions stated on this page.
                 </Typography>
                 <Typography variant="body1" paddingBottom={1}>
@@ -81,8 +81,8 @@ const TermsAndConditions = () => {
               <Divider />
               <CardContent sx={{ py: 2, px: 4 }}>
                 <Typography variant="body1" paddingBottom={1}>
-                  We employ the use of cookies. By accessing Jugadu, you agreed
-                  to use cookies in agreement with the Jugadu's Privacy Policy.
+                  We employ the use of cookies. By accessing SP Rashi FAL, you agreed
+                  to use cookies in agreement with the SP Rashi FAL's Privacy Policy.
                 </Typography>
                 <Typography variant="body1" paddingBottom={1}>
                   Most interactive websites use cookies to let us retrieve the
@@ -109,10 +109,10 @@ const TermsAndConditions = () => {
               <Divider />
               <CardContent sx={{ py: 2, px: 4 }}>
                 <Typography variant="body1" paddingBottom={1}>
-                  Unless otherwise stated, Jugadu and/or its licensors own the
-                  intellectual property rights for all material on Jugadu. All
+                  Unless otherwise stated, SP Rashi FAL and/or its licensors own the
+                  intellectual property rights for all material on SP Rashi FAL. All
                   intellectual property rights are reserved. You may access this
-                  from Jugadu for your own personal use subjected to
+                  from SP Rashi FAL for your own personal use subjected to
                   restrictions set in these terms and conditions.
                 </Typography>
                 <Typography variant="body1" paddingBottom={0}>
@@ -124,28 +124,28 @@ const TermsAndConditions = () => {
                       <li>
                         <Grid item xs={12}>
                           <Text color="black">
-                            Republish material from Jugadu
+                            Republish material from SP Rashi FAL
                           </Text>
                         </Grid>
                       </li>
                       <li>
                         <Grid item xs={12}>
                           <Text color="black">
-                            Sell, rent or sub-license material from Jugadu
+                            Sell, rent or sub-license material from SP Rashi FAL
                           </Text>
                         </Grid>
                       </li>
                       <li>
                         <Grid item xs={12}>
                           <Text color="black">
-                            Reproduce, duplicate or copy material from Jugadu
+                            Reproduce, duplicate or copy material from SP Rashi FAL
                           </Text>
                         </Grid>
                       </li>
                       <li>
                         <Grid item xs={12}>
                           <Text color="black">
-                            Redistribute content from Jugadu
+                            Redistribute content from SP Rashi FAL
                           </Text>
                         </Grid>
                       </li>
@@ -163,18 +163,18 @@ const TermsAndConditions = () => {
                 <Typography variant="body1" paddingBottom={1}>
                   Parts of this website offer an opportunity for users to post
                   and exchange opinions and information in certain areas of the
-                  website. Jugadu does not filter, edit, publish or review
+                  website. SP Rashi FAL does not filter, edit, publish or review
                   Comments prior to their presence on the website. Comments do
-                  not reflect the views and opinions of Jugadu,its agents and/or
+                  not reflect the views and opinions of SP Rashi FAL,its agents and/or
                   affiliates. Comments reflect the views and opinions of the
                   person who post their views and opinions. To the extent
-                  permitted by applicable laws, Jugadu shall not be liable for
+                  permitted by applicable laws, SP Rashi FAL shall not be liable for
                   the Comments or for any liability, damages or expenses caused
                   and/or suffered as a result of any use of and/or posting of
                   and/or appearance of the Comments on this website.
                 </Typography>
                 <Typography variant="body1" paddingBottom={1}>
-                  Jugadu reserves the right to monitor all Comments and to
+                SP Rashi FAL reserves the right to monitor all Comments and to
                   remove any Comments which can be considered inappropriate,
                   offensive or causes breach of these Terms and Conditions.
                 </Typography>
@@ -223,7 +223,7 @@ const TermsAndConditions = () => {
                       <li>
                         <Grid item xs={12}>
                           <Text color="black">
-                            You hereby grant Jugadu a non-exclusive license to
+                            You hereby grant SP Rashi FAL a non-exclusive license to
                             use, reproduce, edit and authorize others to use,
                             reproduce and edit any of your Comments in any and
                             all forms, formats or media.
@@ -429,7 +429,7 @@ const TermsAndConditions = () => {
                   to ourselves or to our accredited businesses; (b) the
                   organization does not have any negative records with us; (c)
                   the benefit to us from the visibility of the hyperlink
-                  compensates the absence of Jugadu; and (d) the link is in the
+                  compensates the absence of SP Rashi FAL; and (d) the link is in the
                   context of general resource information.
                 </Typography>
                 <Typography variant="body1" paddingBottom={1}>
@@ -442,7 +442,7 @@ const TermsAndConditions = () => {
                 <Typography variant="body1" paddingBottom={1}>
                   If you are one of the organizations listed in paragraph 2
                   above and are interested in linking to our website, you must
-                  inform us by sending an e-mail to Jugadu. Please include your
+                  inform us by sending an e-mail to SP Rashi FAL. Please include your
                   name, your organization name, contact information as well as
                   the URL of your site, a list of any URLs from which you intend
                   to link to our Website, and a list of the URLs on our site to
@@ -482,7 +482,7 @@ const TermsAndConditions = () => {
                       <li>
                         <Grid item xs={12}>
                           <Text color="black">
-                            No use of Jugadu's logo or other artwork will be
+                            No use of SP Rashi FAL's logo or other artwork will be
                             allowed for linking absent a trademark license
                             agreement.
                           </Text>

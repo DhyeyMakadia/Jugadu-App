@@ -38,21 +38,23 @@ const HowToPlayDialog: FC<ProfileDialogProps> = ({ isOpen, handleClose }) => {
       <DialogContent>
         <CardContent sx={{ py: 2, px: 4 }}>
           <Typography variant="body1" paddingBottom={1}>
-            Learn how to play JUGADU Game right here, and take part in the first
-            online Betting for the whole of India. Whether you’re located in
-            India or elsewhere, playing couldn’t be simpler and takes seconds.
-            Read on to find out how the Game works, how to enter and what to
-            expect from the JUGADU.
+            Learn how to play SP Rashi FAL Game right here, and take part in the
+            first online Betting for the whole of India. Whether you’re located
+            in India or elsewhere, playing couldn’t be simpler and takes
+            seconds. Read on to find out how the Game works, how to enter and
+            what to expect from the SP Rashi FAL.
           </Typography>
           <Typography variant="body1" paddingBottom={1}>
-            Entering a JUGADU will only take you a maximum of minutes. Minimum
-            Betting point 10 and you will only need a computer, tablet or
-            smartphone that can access the internet to play online. Once you are
-            ready to play JUGADU Game, follow the steps below:
+            Entering a SP Rashi FAL will only take you a maximum of minutes.
+            Minimum Betting point 10 and you will only need a computer, tablet
+            or smartphone that can access the internet to play online. Once you
+            are ready to play SP Rashi FAL Game, follow the steps below:
           </Typography>
           <Typography variant="subtitle2">
             <ol>
-              <li>First of all, Signup and Login to your JUGADU Account.</li>
+              <li>
+                First of all, Signup and Login to your SP Rashi FAL Account.
+              </li>
               <li>Deposit Balance and Start Play.</li>
               <li>Minimum amount to bet is Point 10.</li>
               <li>
@@ -73,20 +75,20 @@ const HowToPlayDialog: FC<ProfileDialogProps> = ({ isOpen, handleClose }) => {
           <Typography variant="subtitle1" paddingBottom={1}>
             <ul>
               <li>
-                JUGADU allows you to earn money by Predict correct Yantra. The
-                amount earned can be withdrawn through UPI or Bank.
+                SP Rashi FAL allows you to earn money by Predict correct Yantra.
+                The amount earned can be withdrawn through UPI or Bank.
               </li>
               <li>
                 It’s also important to mention the top-notch refer-and-earn
-                scheme offered by the JUGADU. You can refer your friends, and if
-                any of them opt to top off their wallets, you will receive 10%
-                points as a commission.
+                scheme offered by the SP Rashi FAL. You can refer your friends,
+                and if any of them opt to top off their wallets, you will
+                receive 10% points as a commission.
               </li>
             </ul>
           </Typography>
-          <Typography variant="body1" paddingBottom={1}>
+          {/* <Typography variant="body1" paddingBottom={1}>
             WhatsApp - 9558958458.
-          </Typography>
+          </Typography> */}
           <Typography variant="body1" paddingBottom={1}>
             Thanks
           </Typography>
@@ -94,7 +96,7 @@ const HowToPlayDialog: FC<ProfileDialogProps> = ({ isOpen, handleClose }) => {
             Regards
           </Typography>
           <Typography variant="body1" paddingBottom={1}>
-            JUGADU GAME.
+            SP Rashi FAL GAME.
           </Typography>
         </CardContent>
       </DialogContent>

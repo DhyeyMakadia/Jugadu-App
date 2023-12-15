@@ -98,7 +98,7 @@ function Logo() {
   const theme = useTheme();
 
   return (
-    <TooltipWrapper title="Jugadu App" arrow>
+    <TooltipWrapper title="SP Rashi FAL" arrow>
       <LogoWrapper to="/">
         <img src="/icons8-logo-128-white.svg" alt="" height={40} width={40} />
       </LogoWrapper>

@@ -11,20 +11,25 @@ import {
 } from '@mui/material';
 import PlaceBidDialog from './PlaceBidDialog';
 import BidsService from 'src/services/bids/index';
-import { GetAllUserRashiObject } from 'src/services/types/bids';
+import {
+  BidsWinnerListObject,
+  GetAllUserRashiObject
+} from 'src/services/types/bids';
 import Timer from 'src/components/Timer';
 import { Helmet } from 'react-helmet-async';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import {
-  Autoplay,
-  EffectCreative} from 'swiper/modules';
+import { Autoplay, EffectCreative } from 'swiper/modules';
+import LiveClock from 'src/components/LiveClock';
+import BidService from 'src/services/bids/index';
 
 const Dashboard = () => {
   const [placeBidDialogOpen, setPlaceBidDialogOpen] = useState<{
     isOpen: boolean;
     id: number;
   }>({ id: 0, isOpen: false });
+  const [latestWinnerData, setLatestWinnerData] =
+    useState<BidsWinnerListObject>();
   const [rashiData, setRashiData] = useState<Array<GetAllUserRashiObject>>([]);
 
   const getRashiData = () => {
@@ -40,7 +45,16 @@ const Dashboard = () => {
     setPlaceBidDialogOpen({ isOpen: false, id: 0 });
   };
 
+  const getWinningBidsData = () => {
+    BidService.WinnerList().then((res) => {
+      if (res.data.success) {
+        setLatestWinnerData(res.data.data[0]);
+      }
+    });
+  };
+
   useEffect(() => {
+    getWinningBidsData();
     getRashiData();
   }, []);
 
@@ -70,8 +84,15 @@ const Dashboard = () => {
             <Typography variant="h3" component="h3" gutterBottom>
               Dashboard
             </Typography>
-            <Typography variant="subtitle2">
+            <Typography component="b" variant="h4">
               Bids End in: <Timer />
+            </Typography>
+            <Typography variant="subtitle2">
+              <LiveClock />
+            </Typography>
+            <Typography component="b" variant="h4">
+              {latestWinnerData?.time} {'  '}
+              {latestWinnerData?.ZodiacName}
             </Typography>
           </Grid>
           <Swiper
@@ -79,7 +100,7 @@ const Dashboard = () => {
             slidesPerView={1}
             centeredSlides={true}
             loop={true}
-            style={{ backgroundColor: 'white', marginTop: "10px" }}
+            style={{ backgroundColor: 'white', marginTop: '10px' }}
             autoplay={{
               delay: 5000
             }}

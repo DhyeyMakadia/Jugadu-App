@@ -54,12 +54,12 @@ const MyOrders = () => {
           alignItems="stretch"
           spacing={3}
         >
-          <Grid item xs={6}>
+          <Grid item xs={12} lg={6}>
             <Card>
               <MyBidsTable bids={bidsData} />
             </Card>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} lg={6}>
             <Card>
               <TodaysWinningTable data={winningData} />
             </Card>

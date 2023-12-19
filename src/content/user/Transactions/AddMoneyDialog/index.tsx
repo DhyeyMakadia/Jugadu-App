@@ -93,34 +93,14 @@ const AddMoneyDialog: FC<Props> = ({ handleClose, isOpen }) => {
       <DialogContent>
         <Grid container xs={12}>
           <Grid item xs={12}>
-            <FormControl
-              variant="standard"
-              fullWidth
-              sx={{ pb: '20px' }}
-              // error={!!(errors.name && touched.name)}
-            >
-              {/* <InputLabel htmlFor="name">Name</InputLabel> */}
-              <TextField
-                margin="dense"
-                name="amount"
-                id="amount"
-                label="Amount"
-                onChange={(e) => setAddMoneyAmount(Number(e.target.value))}
-                type="number"
-                fullWidth
-                variant="standard"
-              />
-              {/* <FormHelperText error>
-            <ErrorMessage name="mobile_number" />
-          </FormHelperText> */}
-            </FormControl>
+            <img
+              src="/Payment-QRCode.jpg"
+              alt=""
+              style={{ objectFit: 'contain', width: '100%' }}
+            />
           </Grid>
         </Grid>
       </DialogContent>
-      <DialogActions>
-        <Button onClick={handleDialogClose}>Cancel</Button>
-        <Button onClick={handleAddWithdrawRequest}>Add Money</Button>
-      </DialogActions>
     </Dialog>
   );
 };

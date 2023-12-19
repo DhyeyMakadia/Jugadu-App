@@ -193,8 +193,8 @@ const Login = () => {
                               </Typography>
                               <Button
                                 component={RouterLink}
-                                size="medium"
-                                variant="outlined"
+                                size="small"
+                                variant="text"
                                 to={ROUTES.Signup}
                               >
                                 Register

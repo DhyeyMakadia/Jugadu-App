@@ -44,7 +44,7 @@ const PlaceBidDialog: FC<PlaceBidDialogProps> = ({
   const [bidAmount, setBidAmount] = useState<number>(500);
 
   const handlePlaceBid = () => {
-    if (bidAmount > 0) {
+    if (bidAmount > 10) {
       const payload = {
         zodiac_id: zodiacId,
         bid_amount: bidAmount
@@ -59,7 +59,7 @@ const PlaceBidDialog: FC<PlaceBidDialogProps> = ({
         }
       });
     } else {
-      toast.error('Bid Amount must be greater than zero');
+      toast.error('Bid Amount must be greater than ₹10');
     }
   };
 

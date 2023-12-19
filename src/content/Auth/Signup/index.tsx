@@ -65,7 +65,7 @@ const Signup = () => {
         toast.success('User created successfully');
         navigate(ROUTES.Login);
       } else {
-        toast.error('User already exists');
+        toast.error(res.data.message);
       }
     });
   };
@@ -246,8 +246,8 @@ const Signup = () => {
                               </Typography>
                               <Button
                                 component={RouterLink}
-                                size="medium"
-                                variant="outlined"
+                                size="small"
+                                variant="text"
                                 to={'/login'}
                               >
                                 Login

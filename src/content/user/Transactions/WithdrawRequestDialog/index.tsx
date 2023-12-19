@@ -38,7 +38,7 @@ const WithdrawRequestDialog: FC<Props> = ({ handleClose, isOpen }) => {
   const [withdrawAmount, setWithdrawAmount] = useState<number>(0);
 
   const handleAddWithdrawRequest = () => {
-    if (withdrawAmount > 0) {
+    if (withdrawAmount > 500) {
       WithdrawService.CreateWithdrawRequest({
         request_amount: withdrawAmount
       }).then((res) => {
@@ -49,7 +49,7 @@ const WithdrawRequestDialog: FC<Props> = ({ handleClose, isOpen }) => {
         }
       });
     } else {
-      toast.error('Withdraw Amount must be greater than zero');
+      toast.error('Withdraw Amount must be greater than ₹500');
     }
   };
 

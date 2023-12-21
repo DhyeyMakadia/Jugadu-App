@@ -10,13 +10,13 @@ import {
   DialogActions,
   useTheme,
   useMediaQuery,
-  Slide
+  Slide,
+  IconButton
 } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
-import BidService from 'src/services/bids/index';
 import { toast } from 'react-toastify';
-import { StatusCode } from 'src/utils/constants';
 import WithdrawService from 'src/services/withdraw/index';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -59,7 +59,7 @@ const WithdrawRequestDialog: FC<Props> = ({ handleClose, isOpen }) => {
   };
   return (
     <Dialog
-      fullScreen={fullScreen}
+      // fullScreen={fullScreen}
       onClose={handleDialogClose}
       open={isOpen}
       TransitionComponent={Transition}
@@ -67,6 +67,18 @@ const WithdrawRequestDialog: FC<Props> = ({ handleClose, isOpen }) => {
       maxWidth="sm"
     >
       <DialogTitle>Add Withdraw Request</DialogTitle>
+      <IconButton
+        aria-label="close"
+        onClick={handleDialogClose}
+        sx={{
+          position: 'absolute',
+          right: 8,
+          top: 8,
+          color: (theme) => theme.palette.grey[500]
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
       <DialogContent>
         <Grid container xs={12}>
           <Grid item xs={12}>

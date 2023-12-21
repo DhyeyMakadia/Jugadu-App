@@ -12,7 +12,8 @@ import {
   Switch,
   TextField,
   useMediaQuery,
-  Typography
+  Typography,
+  IconButton
 } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import React, { FC } from 'react';
@@ -24,6 +25,7 @@ import { ErrorMessage, Formik, FormikValues } from 'formik';
 import * as Yup from 'yup';
 import RashiService from 'src/services/rashi/index';
 import { toast } from 'react-toastify';
+import CloseIcon from '@mui/icons-material/Close';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -103,38 +105,50 @@ const AddRashiDialog: FC<AddRashiDialogProps> = ({
     }
   };
   return (
-    <Dialog
-      fullScreen={fullScreen}
-      onClose={handleClose}
-      open={isOpen}
-      TransitionComponent={Transition}
-      fullWidth
-      maxWidth="sm"
+    <Formik
+      initialValues={{
+        name: data?.name ?? '',
+        order: data?.order ?? 0,
+        image: data?.image ?? null,
+        status: data?.status ?? true
+      }}
+      validationSchema={validationSchema}
+      onSubmit={handleAddRashiSubmit}
+      enableReinitialize
     >
-      <DialogTitle>{data ? 'Edit Rashi' : 'Add Rashi'}</DialogTitle>
-      <Formik
-        initialValues={{
-          name: data?.name ?? '',
-          order: data?.order ?? 0,
-          image: data?.image ?? null,
-          status: data?.status ?? true
-        }}
-        validationSchema={validationSchema}
-        onSubmit={handleAddRashiSubmit}
-        enableReinitialize
-      >
-        {({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          setFieldValue
-        }) => {
-          const fileName = values?.image?.target?.files[0]?.name;
-          return (
-            <form onSubmit={handleSubmit} encType="multipart/formdata">
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        setFieldValue
+      }) => {
+        const fileName = values?.image?.target?.files[0]?.name;
+        return (
+          <form onSubmit={handleSubmit} encType="multipart/formdata">
+            <Dialog
+              fullScreen={fullScreen}
+              onClose={handleClose}
+              open={isOpen}
+              TransitionComponent={Transition}
+              fullWidth
+              maxWidth="sm"
+            >
+              <DialogTitle>{data ? 'Edit Rashi' : 'Add Rashi'}</DialogTitle>
+              <IconButton
+                aria-label="close"
+                onClick={() => handleClose()}
+                sx={{
+                  position: 'absolute',
+                  right: 8,
+                  top: 8,
+                  color: (theme) => theme.palette.grey[500]
+                }}
+              >
+                <CloseIcon />
+              </IconButton>
               <DialogContent>
                 <Grid container xs={12}>
                   <Grid item xs={12}>
@@ -248,11 +262,11 @@ const AddRashiDialog: FC<AddRashiDialogProps> = ({
                 <Button onClick={handleClose}>Cancel</Button>
                 <Button type="submit">Add Rashi</Button>
               </DialogActions>
-            </form>
-          );
-        }}
-      </Formik>
-    </Dialog>
+            </Dialog>
+          </form>
+        );
+      }}
+    </Formik>
   );
 };
 

@@ -186,6 +186,7 @@ const Dashboard = () => {
                               component="b"
                               color="text.secondary"
                               fontWeight="bold"
+                              marginLeft={2}
                             >
                               Amount: {rashi.bid_amount}
                             </Typography>

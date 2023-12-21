@@ -10,13 +10,15 @@ import {
   DialogActions,
   useTheme,
   useMediaQuery,
-  Slide
+  Slide,
+  IconButton
 } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import BidService from 'src/services/bids/index';
 import { toast } from 'react-toastify';
 import { StatusCode } from 'src/utils/constants';
 import { ThemeContext } from 'src/theme/ThemeProvider';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -39,7 +41,7 @@ const PlaceBidDialog: FC<PlaceBidDialogProps> = ({
   zodiacId
 }) => {
   const theme = useTheme();
-  const { getCurrentBalance } = useContext(ThemeContext)
+  const { getCurrentBalance } = useContext(ThemeContext);
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
   const [bidAmount, setBidAmount] = useState<number>(500);
 
@@ -52,7 +54,7 @@ const PlaceBidDialog: FC<PlaceBidDialogProps> = ({
       BidService.PlaceBid(payload).then((res) => {
         if (res.data.success) {
           toast.success('Bid Placed Successfully');
-          getCurrentBalance()
+          getCurrentBalance();
           handleClose(true);
         } else if (res.status === StatusCode.BadRequest) {
           toast.error(res.data.message);
@@ -65,7 +67,7 @@ const PlaceBidDialog: FC<PlaceBidDialogProps> = ({
 
   return (
     <Dialog
-      fullScreen={fullScreen}
+      // fullScreen={fullScreen}
       onClose={handleClose}
       open={isOpen}
       TransitionComponent={Transition}
@@ -73,6 +75,18 @@ const PlaceBidDialog: FC<PlaceBidDialogProps> = ({
       maxWidth="sm"
     >
       <DialogTitle>Place Bid</DialogTitle>
+      <IconButton
+        aria-label="close"
+        onClick={() => handleClose()}
+        sx={{
+          position: 'absolute',
+          right: 8,
+          top: 8,
+          color: (theme) => theme.palette.grey[500]
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
       <DialogContent>
         <Grid container xs={12}>
           <Grid item xs={12}>

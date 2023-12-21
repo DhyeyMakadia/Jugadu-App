@@ -7,10 +7,14 @@ import {
   useTheme,
   useMediaQuery,
   Slide,
-  IconButton
+  IconButton,
+  Button,
+  Box
 } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import CloseIcon from '@mui/icons-material/Close';
+import { QRCode } from 'react-qrcode-logo';
+import environment from 'src/environment';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -29,6 +33,28 @@ type Props = {
 const AddMoneyDialog: FC<Props> = ({ handleClose, isOpen }) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+
+  const handlePayment = (mode: string) => {
+    const transactionNote = 'AddMoney';
+    let url = `pay?pa=${environment.upiId}&pn=${environment.upiMerchantName}&tn=${transactionNote}`;
+    switch (mode) {
+      case 'PayTM':
+        url = 'paytmmp://' + url;
+        break;
+      case 'PhonePe':
+        url = 'phonepe://' + url;
+        break;
+      case 'GooglePay':
+        url = 'tez://upi/' + url;
+        break;
+      default:
+        url = 'upi://' + url;
+        break;
+    }
+    const newWindow = window.open(url, '', 'noopener,noreferrer');
+    if (newWindow) newWindow.opener = null;
+    handleClose();
+  };
   return (
     <Dialog
       fullScreen={fullScreen}
@@ -54,11 +80,58 @@ const AddMoneyDialog: FC<Props> = ({ handleClose, isOpen }) => {
       <DialogContent>
         <Grid container xs={12}>
           <Grid item xs={12}>
-            <img
+            <Box>
+              <div>
+                <div style={{ textAlign: 'center', marginBottom: '10px' }}>
+                  <p className="text-white" style={{ marginBottom: '10px' }}>
+                    Scan the QR code or click the button to make the payment
+                  </p>
+                  <QRCode
+                    value={`upi://pay?pa=${environment.upiId}&pn=${environment.upiMerchantName}&tn=AddMoney`}
+                    size={260}
+                    // logoImage="https://i.postimg.cc/5tdHfkxF/118852864-1241633666213183-4722008391193475906-n.png"
+                    // logoWidth={80}
+                    // logoHeight={100}
+                    // logoOpacity={0.6}
+                  />
+                </div>
+                <Button
+                  variant="contained"
+                  size="large"
+                  fullWidth
+                  className="custom-bg-green"
+                  style={{ marginBottom: '10px' }}
+                  onClick={() => handlePayment('GooglePay')}
+                >
+                  Google Pay
+                </Button>
+                <Button
+                  variant="contained"
+                  size="large"
+                  fullWidth
+                  className="custom-bg-green"
+                  style={{ marginBottom: '10px' }}
+                  onClick={() => handlePayment('PhonePe')}
+                >
+                  Phone Pe
+                </Button>
+                <Button
+                  variant="contained"
+                  size="large"
+                  fullWidth
+                  className="custom-bg-green"
+                  style={{ marginBottom: '10px' }}
+                  onClick={() => handlePayment('PayTM')}
+                >
+                  PayTM
+                </Button>
+              </div>
+            </Box>
+            {/* <img
               src="/Payment-QRCode.jpg"
               alt=""
               style={{ objectFit: 'contain', width: '100%' }}
-            />
+            /> */}
           </Grid>
         </Grid>
       </DialogContent>

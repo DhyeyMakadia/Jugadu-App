@@ -14,7 +14,7 @@ const Withdraw = () => {
       <PageTitleWrapper>
         <PageHeader />
       </PageTitleWrapper>
-      <Container maxWidth="lg">
+      <Container maxWidth={false} style={{ width: '100%' }}>
         <Grid
           container
           direction="row"

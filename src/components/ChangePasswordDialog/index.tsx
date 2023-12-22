@@ -50,14 +50,11 @@ const ChangePasswordDialog: FC<Props> = ({ isOpen, handleClose }) => {
       old_password: values.oldPassword,
       new_password: values.password
     };
-    console.log(payload);
     UserService.ChangePassword(payload).then((res) => {
-      debugger
       if (res.data.success) {
         handleClose();
         toast.success('Password Changed Successfully');
       } else {
-        debugger
         toast.error(res.data.message);
       }
     });

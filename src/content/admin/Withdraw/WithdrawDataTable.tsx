@@ -121,6 +121,9 @@ const WithdrawDataTable: FC<Props> = ({ withdrawRequests, refetch }) => {
               <TableCell>Name</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Request Amount</TableCell>
+              <TableCell align='center'>Account Holder Name</TableCell>
+              <TableCell align='center'>Account Number</TableCell>
+              <TableCell align='center'>IFSC Code</TableCell>
               <TableCell>Mobile</TableCell>
               <TableCell align="center">Status</TableCell>
               <TableCell align="center">Actions</TableCell>
@@ -140,9 +143,6 @@ const WithdrawDataTable: FC<Props> = ({ withdrawRequests, refetch }) => {
                     >
                       {request?.userDetails?.name}
                     </Typography>
-                    {/* <Typography variant="body2" color="text.secondary" noWrap>
-                      {format(rashi.name, 'MMMM dd yyyy')}
-                    </Typography> */}
                   </TableCell>
                   <TableCell>
                     <Typography
@@ -165,6 +165,42 @@ const WithdrawDataTable: FC<Props> = ({ withdrawRequests, refetch }) => {
                       noWrap
                     >
                       ₹ {request?.request_amount ?? 0}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography
+                      variant="body1"
+                      fontWeight="bold"
+                      color="text.primary"
+                      gutterBottom
+                      noWrap
+                      align='center'
+                    >
+                      {request?.account_holder_name ?? "-"}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography
+                      variant="body1"
+                      fontWeight="bold"
+                      color="text.primary"
+                      gutterBottom
+                      noWrap
+                      align='center'
+                    >
+                      {request?.account_number ?? "-"}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography
+                      variant="body1"
+                      fontWeight="bold"
+                      color="text.primary"
+                      gutterBottom
+                      noWrap
+                      align='center'
+                    >
+                      {request?.ifsc_code ?? "-"}
                     </Typography>
                   </TableCell>
                   <TableCell>

@@ -105,37 +105,37 @@ const AddRashiDialog: FC<AddRashiDialogProps> = ({
     }
   };
   return (
-    <Formik
-      initialValues={{
-        name: data?.name ?? '',
-        order: data?.order ?? 0,
-        image: data?.image ?? null,
-        status: data?.status ?? true
-      }}
-      validationSchema={validationSchema}
-      onSubmit={handleAddRashiSubmit}
-      enableReinitialize
+    <Dialog
+      fullScreen={fullScreen}
+      onClose={handleClose}
+      open={isOpen}
+      TransitionComponent={Transition}
+      fullWidth
+      maxWidth="sm"
     >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        setFieldValue
-      }) => {
-        const fileName = values?.image?.target?.files[0]?.name;
-        return (
-          <form onSubmit={handleSubmit} encType="multipart/formdata">
-            <Dialog
-              fullScreen={fullScreen}
-              onClose={handleClose}
-              open={isOpen}
-              TransitionComponent={Transition}
-              fullWidth
-              maxWidth="sm"
-            >
+      <Formik
+        initialValues={{
+          name: data?.name ?? '',
+          order: data?.order ?? 0,
+          image: data?.image ?? null,
+          status: data?.status ?? true
+        }}
+        validationSchema={validationSchema}
+        onSubmit={handleAddRashiSubmit}
+        enableReinitialize
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          setFieldValue
+        }) => {
+          const fileName = values?.image?.target?.files[0]?.name;
+          return (
+            <form onSubmit={handleSubmit} encType="multipart/formdata">
               <DialogTitle>{data ? 'Edit Rashi' : 'Add Rashi'}</DialogTitle>
               <IconButton
                 aria-label="close"
@@ -262,11 +262,11 @@ const AddRashiDialog: FC<AddRashiDialogProps> = ({
                 <Button onClick={handleClose}>Cancel</Button>
                 <Button type="submit">Add Rashi</Button>
               </DialogActions>
-            </Dialog>
-          </form>
-        );
-      }}
-    </Formik>
+            </form>
+          );
+        }}
+      </Formik>
+    </Dialog>
   );
 };
 

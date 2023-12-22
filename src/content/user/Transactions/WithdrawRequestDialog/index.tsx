@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -11,12 +11,16 @@ import {
   useTheme,
   useMediaQuery,
   Slide,
-  IconButton
+  IconButton,
+  FormHelperText
 } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import { toast } from 'react-toastify';
 import WithdrawService from 'src/services/withdraw/index';
 import CloseIcon from '@mui/icons-material/Close';
+import { ErrorMessage, Form, Formik, FormikValues } from 'formik';
+import * as Yup from 'yup';
+import { preventNonNumericalInput } from 'src/utils/helperFunctions';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -35,17 +39,38 @@ type Props = {
 const WithdrawRequestDialog: FC<Props> = ({ handleClose, isOpen }) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-  const [withdrawAmount, setWithdrawAmount] = useState<number>(0);
+  const formRef = useRef<any>();
 
-  const handleAddWithdrawRequest = () => {
-    if (withdrawAmount > 500) {
-      WithdrawService.CreateWithdrawRequest({
-        request_amount: withdrawAmount
-      }).then((res) => {
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required('Name is Required'),
+    amount: Yup.string()
+      .matches(/^\d+$/, 'Amount must be in digits only')
+      .required('Amount is required'),
+    accountNo: Yup.string()
+      .matches(/^\d+$/, 'Account Number must be digits only')
+      .required('Account Number is required'),
+    confirmAccountNo: Yup.string()
+      .oneOf([Yup.ref('accountNo')], 'Account Number must match')
+      .matches(/^\d+$/, 'Account Number must be digits only')
+      .required('Confirm Account Number is required'),
+    ifsc: Yup.string().required('IFSC Code is required')
+  });
+
+  const handleAddWithdrawRequest = (values: FormikValues) => {
+    if (values.amount > 500) {
+      const payload = {
+        request_amount: values.amount,
+        account_holder_name: values.name,
+        account_number: values.accountNo,
+        ifsc_code: values.ifsc
+      };
+      WithdrawService.CreateWithdrawRequest(payload).then((res) => {
         if (res.data.success) {
           toast.success('Withdraw Request Created Successfully');
-          setWithdrawAmount(0);
+          formRef.current.resetForm();
           handleClose(true);
+        } else {
+          toast.error(res.data.message);
         }
       });
     } else {
@@ -54,62 +79,189 @@ const WithdrawRequestDialog: FC<Props> = ({ handleClose, isOpen }) => {
   };
 
   const handleDialogClose = () => {
-    setWithdrawAmount(0);
+    formRef.current.resetForm();
     handleClose();
   };
   return (
     <Dialog
-      // fullScreen={fullScreen}
+      fullScreen={fullScreen}
       onClose={handleDialogClose}
       open={isOpen}
       TransitionComponent={Transition}
       fullWidth
       maxWidth="sm"
     >
-      <DialogTitle>Add Withdraw Request</DialogTitle>
-      <IconButton
-        aria-label="close"
-        onClick={handleDialogClose}
-        sx={{
-          position: 'absolute',
-          right: 8,
-          top: 8,
-          color: (theme) => theme.palette.grey[500]
+      <Formik
+        initialValues={{
+          name: '',
+          amount: null,
+          accountNo: '',
+          confirmAccountNo: '',
+          ifsc: ''
         }}
+        innerRef={formRef}
+        validationSchema={validationSchema}
+        onSubmit={handleAddWithdrawRequest}
+        enableReinitialize
       >
-        <CloseIcon />
-      </IconButton>
-      <DialogContent>
-        <Grid container xs={12}>
-          <Grid item xs={12}>
-            <FormControl
-              variant="standard"
-              fullWidth
-              sx={{ pb: '20px' }}
-              // error={!!(errors.name && touched.name)}
-            >
-              {/* <InputLabel htmlFor="name">Name</InputLabel> */}
-              <TextField
-                margin="dense"
-                name="amount"
-                id="amount"
-                label="Amount"
-                onChange={(e) => setWithdrawAmount(Number(e.target.value))}
-                type="number"
-                fullWidth
-                variant="standard"
-              />
-              {/* <FormHelperText error>
-            <ErrorMessage name="mobile_number" />
-          </FormHelperText> */}
-            </FormControl>
-          </Grid>
-        </Grid>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleDialogClose}>Cancel Request</Button>
-        <Button onClick={handleAddWithdrawRequest}>Add Request</Button>
-      </DialogActions>
+        {({
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+        }) => {
+          return (
+            <Form>
+              <DialogTitle>Add Withdraw Request</DialogTitle>
+              <IconButton
+                aria-label="close"
+                onClick={handleDialogClose}
+                sx={{
+                  position: 'absolute',
+                  right: 8,
+                  top: 8,
+                  color: (theme) => theme.palette.grey[500]
+                }}
+              >
+                <CloseIcon />
+              </IconButton>
+              <DialogContent>
+                <Grid container xs={12}>
+                  <Grid item xs={12}>
+                    <FormControl
+                      variant="standard"
+                      fullWidth
+                      sx={{ pb: '20px' }}
+                      error={!!(errors.amount && touched.amount)}
+                    >
+                      {/* <InputLabel htmlFor="name">Name</InputLabel> */}
+                      <TextField
+                        margin="dense"
+                        name="amount"
+                        id="amount"
+                        label="Amount"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                        onKeyPress={(e) => preventNonNumericalInput(e)}
+                      />
+                      <FormHelperText error>
+                        <ErrorMessage name="amount" />
+                      </FormHelperText>
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormControl
+                      variant="standard"
+                      fullWidth
+                      sx={{ pb: '20px' }}
+                      error={!!(errors.name && touched.name)}
+                    >
+                      {/* <InputLabel htmlFor="name">Name</InputLabel> */}
+                      <TextField
+                        margin="dense"
+                        name="name"
+                        id="name"
+                        label="Name"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                      />
+                      <FormHelperText error>
+                        <ErrorMessage name="name" />
+                      </FormHelperText>
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormControl
+                      variant="standard"
+                      fullWidth
+                      sx={{ pb: '20px' }}
+                      error={!!(errors.accountNo && touched.accountNo)}
+                    >
+                      {/* <InputLabel htmlFor="name">Name</InputLabel> */}
+                      <TextField
+                        margin="dense"
+                        name="accountNo"
+                        id="accountNo"
+                        label="Account Number"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                        onKeyPress={(e) => preventNonNumericalInput(e)}
+                      />
+                      <FormHelperText error>
+                        <ErrorMessage name="accountNo" />
+                      </FormHelperText>
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormControl
+                      variant="standard"
+                      fullWidth
+                      sx={{ pb: '20px' }}
+                      error={
+                        !!(errors.confirmAccountNo && touched.confirmAccountNo)
+                      }
+                    >
+                      {/* <InputLabel htmlFor="name">Name</InputLabel> */}
+                      <TextField
+                        margin="dense"
+                        name="confirmAccountNo"
+                        id="ConfirmAccountNo"
+                        label="Confirm Account Number"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                        onKeyPress={(e) => preventNonNumericalInput(e)}
+                      />
+                      <FormHelperText error>
+                        <ErrorMessage name="confirmAccountNo" />
+                      </FormHelperText>
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormControl
+                      variant="standard"
+                      fullWidth
+                      sx={{ pb: '20px' }}
+                      error={!!(errors.ifsc && touched.ifsc)}
+                    >
+                      {/* <InputLabel htmlFor="name">Name</InputLabel> */}
+                      <TextField
+                        margin="dense"
+                        name="ifsc"
+                        id="ifsc"
+                        label="IFSC Code"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                      />
+                      <FormHelperText error>
+                        <ErrorMessage name="ifsc" />
+                      </FormHelperText>
+                    </FormControl>
+                  </Grid>
+                </Grid>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleDialogClose}>Cancel Request</Button>
+                <Button type="submit">Add Request</Button>
+              </DialogActions>
+            </Form>
+          );
+        }}
+      </Formik>
     </Dialog>
   );
 };

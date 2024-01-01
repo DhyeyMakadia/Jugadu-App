@@ -27,5 +27,21 @@ export type GetBalanceObject = {
 };
 
 export type GetBalanceResponse = DEFAULT_RESPONSE_TYPE & {
-  data: Array<GetBalanceObject>
-}
+  data: Array<GetBalanceObject>;
+};
+
+export type GetUpiObject = {
+  // id: number;
+  upi_id: string;
+  merchant_name: string;
+  // deleted_at: string;
+};
+
+export type GetUpiResponse = DEFAULT_RESPONSE_TYPE & {
+  data: GetUpiObject;
+};
+
+export type UpdateUpiRequest = {
+  upi_id: string;
+  merchant_name: string;
+};

@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import httpClient from '../httpClient';
 import {
   DEFAULT_RESPONSE_TYPE} from '../types/auth';
-import { AddBalanceRequest, GetBalanceResponse, TransactionsResponse, UserAddBalanceRequest } from '../types/wallet';
+import { AddBalanceRequest, GetBalanceResponse, GetUpiResponse, TransactionsResponse, UpdateUpiRequest, UserAddBalanceRequest } from '../types/wallet';
 
 const controller = 'walletbalance';
 
@@ -19,6 +19,14 @@ class UserService {
   GetBalance = async (
   ): Promise<AxiosResponse<GetBalanceResponse>> =>
     httpClient.get(`${controller}/total/bid/user`);
+
+  GetUpiDetails = async (
+  ): Promise<AxiosResponse<GetUpiResponse>> =>
+    httpClient.get(`${controller}/upi/listing`);
+
+  UpdateUpiDetails = async (payload: UpdateUpiRequest
+  ): Promise<AxiosResponse<DEFAULT_RESPONSE_TYPE>> =>
+    httpClient.post(`${controller}/addUPI/change`, payload);
 
   UserAddBalance = async (payload: UserAddBalanceRequest
   ): Promise<AxiosResponse<DEFAULT_RESPONSE_TYPE>> =>

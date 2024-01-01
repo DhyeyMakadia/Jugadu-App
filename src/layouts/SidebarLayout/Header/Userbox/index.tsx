@@ -3,11 +3,9 @@ import { useContext, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import {
-  Avatar,
   Box,
   Button,
   Divider,
-  Hidden,
   lighten,
   List,
   ListItem,
@@ -19,7 +17,6 @@ import {
 import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
 import { styled } from '@mui/material/styles';
 import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
-import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 import { ROUTES } from 'src/utils/routes';
@@ -32,6 +29,9 @@ import ViewStreamIcon from '@mui/icons-material/ViewStream';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import ChangePasswordDialog from 'src/components/ChangePasswordDialog';
 import KeyIcon from '@mui/icons-material/Key';
+import UPIDialog from 'src/components/UPI';
+import DownloadIcon from '@mui/icons-material/Download';
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -75,6 +75,7 @@ function HeaderUserbox() {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [profileDialogOpen, setProfileDialogOpen] = useState<boolean>(false);
   const [howToPlayOpen, setHowToPlayOpen] = useState<boolean>(false);
+  const [UPIDialogOpen, setUPIDialogOpen] = useState<boolean>(false);
   const [changePasswordDialogOpen, setChangePasswordDialogOpen] =
     useState<boolean>(false);
 
@@ -91,9 +92,21 @@ function HeaderUserbox() {
     handleClose();
   };
 
+  const handleUPIDialogOpen = () => {
+    setUPIDialogOpen(true);
+    handleClose();
+  };
+
   const handleHowToPlayDialog = () => {
     setHowToPlayOpen(true);
     handleClose();
+  };
+
+  const handleAPKDownload = () => {
+    const anchor = document.createElement('a');
+    anchor.href = '/APK_Version.apk';
+    anchor.download = 'APK_Version.apk';
+    anchor.click();
   };
 
   const handleChangePasswordDialog = () => {
@@ -144,6 +157,10 @@ function HeaderUserbox() {
             <PersonIcon fontSize="small" />
             <ListItemText primary="My Profile" />
           </ListItem>
+          <ListItem button onClick={handleUPIDialogOpen}>
+            <CurrencyRupeeIcon fontSize="small" />
+            <ListItemText primary="Manage UPI" />
+          </ListItem>
           <ListItem button onClick={handleChangePasswordDialog}>
             <KeyIcon fontSize="small" />
             <ListItemText primary="Change Password" />
@@ -179,6 +196,10 @@ function HeaderUserbox() {
             <ContactSupportIcon fontSize="small" />
             <ListItemText primary="How to Play" />
           </ListItem>
+          <ListItem button onClick={handleAPKDownload}>
+            <DownloadIcon fontSize="small" />
+            <ListItemText primary="APK Version" title="Download" />
+          </ListItem>
         </List>
         <Divider />
         <Box sx={{ m: 1 }}>
@@ -199,6 +220,10 @@ function HeaderUserbox() {
       <ChangePasswordDialog
         isOpen={changePasswordDialogOpen}
         handleClose={() => setChangePasswordDialogOpen(false)}
+      />
+      <UPIDialog
+        isOpen={UPIDialogOpen}
+        handleClose={() => setUPIDialogOpen(false)}
       />
     </>
   );

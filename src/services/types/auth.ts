@@ -27,4 +27,4 @@ export type SignUpRequest = {
   password: string;
 };
 
-export type SignUpResponse = DEFAULT_RESPONSE_TYPE;
+export type SignUpResponse = any;

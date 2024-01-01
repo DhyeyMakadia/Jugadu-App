@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -14,7 +14,8 @@ import {
 import { TransitionProps } from '@mui/material/transitions';
 import CloseIcon from '@mui/icons-material/Close';
 import { QRCode } from 'react-qrcode-logo';
-import environment from 'src/environment';
+import WalletService from 'src/services/wallet/index';
+import { GetUpiObject } from 'src/services/types/wallet';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -33,10 +34,14 @@ type Props = {
 const AddMoneyDialog: FC<Props> = ({ handleClose, isOpen }) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const [upiData, setUpiData] = useState<GetUpiObject>({
+    upi_id: '',
+    merchant_name: ''
+  });
 
   const handlePayment = (mode: string) => {
     const transactionNote = 'AddMoney';
-    let url = `pay?pa=${environment.upiId}&pn=${environment.upiMerchantName}&tn=${transactionNote}`;
+    let url = `pay?pa=${upiData.upi_id}&pn=${upiData.merchant_name}&tn=${transactionNote}`;
     switch (mode) {
       case 'PayTM':
         url = 'paytmmp://' + url;
@@ -55,6 +60,17 @@ const AddMoneyDialog: FC<Props> = ({ handleClose, isOpen }) => {
     if (newWindow) newWindow.opener = null;
     handleClose();
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      WalletService.GetUpiDetails().then((res) => {
+        if (res.data.success) {
+          setUpiData(res.data.data);
+        }
+      });
+    }
+  }, [isOpen]);
+
   return (
     <Dialog
       fullScreen={fullScreen}
@@ -87,7 +103,7 @@ const AddMoneyDialog: FC<Props> = ({ handleClose, isOpen }) => {
                     Scan the QR code or click the button to make the payment
                   </p>
                   <QRCode
-                    value={`upi://pay?pa=${environment.upiId}&pn=${environment.upiMerchantName}&tn=AddMoney`}
+                    value={`upi://pay?pa=${upiData.upi_id}&pn=${upiData.merchant_name}&tn=AddMoney`}
                     size={260}
                     // logoImage="https://i.postimg.cc/5tdHfkxF/118852864-1241633666213183-4722008391193475906-n.png"
                     // logoWidth={80}

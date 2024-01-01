@@ -9,7 +9,9 @@ import {
   IconButton,
   Tooltip,
   styled,
-  useTheme
+  useTheme,
+  tooltipClasses,
+  TooltipProps
 } from '@mui/material';
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 import { SidebarContext } from 'src/contexts/SidebarContext';
@@ -55,6 +57,23 @@ const HeaderWrapper = styled(Box)(
 `
 );
 
+const TooltipWrapper = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: theme.colors.alpha.trueWhite[100],
+    color: theme.palette.getContrastText(theme.colors.alpha.trueWhite[100]),
+    fontSize: theme.typography.pxToRem(12),
+    fontWeight: 'bold',
+    borderRadius: theme.general.borderRadiusSm,
+    boxShadow:
+      '0 .2rem .8rem rgba(7,9,25,.18), 0 .08rem .15rem rgba(7,9,25,.15)'
+  },
+  [`& .${tooltipClasses.arrow}`]: {
+    color: theme.colors.alpha.trueWhite[100]
+  }
+}));
+
 function Header() {
   const { sidebarToggle, toggleSidebar } = useContext(SidebarContext);
   const { isAdminPage } = useContext(ThemeContext);
@@ -91,10 +110,13 @@ function Header() {
         divider={<Divider orientation="vertical" flexItem />}
         alignItems="center"
         spacing={2}
+        style={{ cursor: 'pointer' }}
       >
-        <div onClick={() => navigate(ROUTES.Dashboard)}>
-          <img src="/icons8-logo-32.svg" alt="img" />
-        </div>
+        <TooltipWrapper title="Home" arrow>
+          <div onClick={() => navigate(ROUTES.Dashboard)}>
+            <img src="/icons8-logo-32.svg" alt="img" />
+          </div>
+        </TooltipWrapper>
         {/* <HeaderMenu /> */}
       </Stack>
       <Box display="flex" alignItems="center">

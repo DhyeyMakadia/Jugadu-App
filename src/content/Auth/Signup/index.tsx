@@ -65,7 +65,7 @@ const Signup = () => {
         toast.success('User created successfully');
         navigate(ROUTES.Login);
       } else {
-        toast.error(res.data.message);
+        toast.error(res.data.error[0].message);
       }
     });
   };

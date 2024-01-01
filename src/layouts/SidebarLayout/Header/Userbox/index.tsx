@@ -71,6 +71,7 @@ const UserBoxDescription = styled(Typography)(
 function HeaderUserbox() {
   const { handleLogout, currentBalance } = useContext(ThemeContext);
   const userName = Cookies.get('LoggedInUser');
+  const isAdmin = parseInt(Cookies.get('isAdmin')) === 1;
   const ref = useRef<any>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
   const [profileDialogOpen, setProfileDialogOpen] = useState<boolean>(false);
@@ -107,6 +108,7 @@ function HeaderUserbox() {
     anchor.href = '/APK_Version.apk';
     anchor.download = 'APK_Version.apk';
     anchor.click();
+    handleClose();
   };
 
   const handleChangePasswordDialog = () => {
@@ -157,10 +159,12 @@ function HeaderUserbox() {
             <PersonIcon fontSize="small" />
             <ListItemText primary="My Profile" />
           </ListItem>
-          <ListItem button onClick={handleUPIDialogOpen}>
-            <CurrencyRupeeIcon fontSize="small" />
-            <ListItemText primary="Manage UPI" />
-          </ListItem>
+          {isAdmin && (
+            <ListItem button onClick={handleUPIDialogOpen}>
+              <CurrencyRupeeIcon fontSize="small" />
+              <ListItemText primary="Manage UPI" />
+            </ListItem>
+          )}
           <ListItem button onClick={handleChangePasswordDialog}>
             <KeyIcon fontSize="small" />
             <ListItemText primary="Change Password" />

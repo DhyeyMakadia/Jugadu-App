@@ -1,5 +1,5 @@
 const environment = {
-  apiUrl: "https://api.jugadu.cloud/api/",
+  apiUrl: "https://api.jagadub.com/api/",
   contact: "+919558958458",
   upiId: "shreegokulenterprise.28670745@sbi",
   upiMerchantName: "SHREE GOKUL ENTERPRISE",
